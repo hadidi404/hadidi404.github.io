@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - debug 
+      - Debug 
 
 permissions:
   contents: read
