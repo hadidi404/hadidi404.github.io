@@ -10,13 +10,17 @@ import ContactSection from './components/sections/ContactSection.vue'
 
 <template>
   <Navbar />
-  <HomeSection />
-  <ServicesSection />
-  <RepairsSection />
-  <AboutSection />
-  <ContactSection />
-  <Footer />
+  <main class="page">
+    <HomeSection />
+    <ServicesSection />
+    <RepairsSection />
+    <AboutSection />
+    <ContactSection />
+    <Footer />
+  </main>
+  
 </template>
 
 <style scoped>
+  
 </style>
