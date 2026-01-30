@@ -6,6 +6,7 @@ import ServicesSection from './components/sections/ServicesSection.vue'
 import RepairsSection from './components/sections/RepairsSection.vue'
 import AboutSection from './components/sections/AboutSection.vue'
 import ContactSection from './components/sections/ContactSection.vue'
+import ServiceAreaSection from './components/sections/ServiceAreaSection.vue'
 </script>
 
 <template>
@@ -15,6 +16,7 @@ import ContactSection from './components/sections/ContactSection.vue'
     <ServicesSection />
     <RepairsSection />
     <AboutSection />
+    <ServiceAreaSection />
     <ContactSection />
     <Footer />
   </main>
