@@ -28,7 +28,7 @@
       <!-- Location Info -->
       <div>
         <h2 class="text-2xl font-bold">{{ location.name }}</h2>
-        <p class="text-gray-600">{{ location.desc }}</p>
+        <p class="text-[#BEDBFF] text-left">{{ location.desc }}</p>
       </div>
     </div>
   </div>

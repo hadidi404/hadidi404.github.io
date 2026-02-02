@@ -1,8 +1,8 @@
 <template>
   <header class="fixed inset-x-0 top-0 z-1000 bg-white shadow-md">
     <div class="mx-auto flex h-[64.8px] max-w-7xl items-center justify-between px-4">
-      <div class="text-2xl font-bold text-gray-800">
-        <p>My Website</p>
+      <div class="text-2xl font-bold bg-linear-to-r from-[#155DFC] to-[#193CB8] bg-clip-text text-transparent">
+        <p>Rayson Tech Services</p>
       </div>
 
       <nav class="flex items-center gap-8">

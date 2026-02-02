@@ -1,10 +1,10 @@
 <template>
-  <section class="flex justify-center">
-    <div
-      class="flex flex-col items-center justify-center pt-50 space-y-4 px-5 mx-auto max-w-7xl"
+  <section class="w-full">
+    <div id="page-container"
+      class="max-w-7xl mx-auto flex flex-col items-center justify-center pt-50 space-y-4 px-5"
     >
       <p
-        class="flex justify-center text-xl text-blue-700 font-semibold bg-blue-100 rounded-full items-center px-5 py-2"
+        class="w-fit text-xl text-blue-700 font-semibold bg-blue-100 rounded-full items-center px-5 py-2"
       >
         WHAT I OFFER
       </p>

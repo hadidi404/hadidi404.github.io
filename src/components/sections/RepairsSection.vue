@@ -9,8 +9,8 @@
     <p class="font-normal text-2xl text-gray-600">
       See the quality of work I deliver for every device
     </p>
-
-    <div class="max-w-7xl mx-auto space-y-4 px-5">
+    <RecentRepairCards />
+    <div class="max-w-7xl mx-auto space-y-4 px-4">
       <h1 class="mt-50 text-6xl font-bold">Why Choose Me</h1>
       <p class="font-normal text-2xl text-gray-600 mb-12">
         Trust and quality in every repair
@@ -22,6 +22,7 @@
 </template>
 
 <script setup>
+import RecentRepairCards from '../ui/RecentRepairCards.vue';
 import RepairCard from '../ui/RepairCard.vue';
 </script>
 

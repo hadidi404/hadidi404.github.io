@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+  <div class="w-full grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
     <div v-for="(group, gIndex) in serviceGroups" :key="gIndex" class="bg-white rounded-2xl p-8 shadow-sm 
                 hover:shadow-2xl duration-300 border border-gray-100 border-2
                 hover:border-transparent hover:-translate-y-1 space-y-5">

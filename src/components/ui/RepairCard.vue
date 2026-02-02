@@ -1,9 +1,9 @@
 <template>
-  <div class="grid grid-cols-1 mt-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
         <div
           v-for="card in trustCards"
           :key="card.title"
-          class="h rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+          class="rounded-2xl border  border-gray-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
         >
           <div class="mb-4 flex justify-center">
             <div class="rounded-2xl border border-gray-200 bg-gray-50 p-4">
