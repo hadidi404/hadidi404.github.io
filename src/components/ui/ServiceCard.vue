@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
+  <div class="w-full grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
     <div v-for="(group, gIndex) in serviceGroups" :key="gIndex" class="bg-white rounded-2xl p-8 shadow-sm 
-                hover:shadow-2xl duration-300 border border-gray-100 border-2
+                hover:shadow-2xl duration-300 border-gray-100 border-2
                 hover:border-transparent hover:-translate-y-1 space-y-5">
       <!-- Icon placeholder -->
       <div
@@ -32,10 +32,10 @@
 
       <!-- Services list -->
       <div class="flex flex-col items-start gap-1">
-        <div v-for="(service, sIndex) in group.services" :key="sIndex" class="flex items-center gap-2 outline outline-2 outline-white/20 py-2
-                    max-w-[460px] rounded-full text-sm leading-tight bg-white/5 backdrop-blur">
+        <div v-for="(service, sIndex) in group.services" :key="sIndex" class="flex items-center gap-2 outline-2 outline-white/20 py-2
+                    w-full rounded-full text-sm leading-tight bg-white/5 backdrop-blur">
           <!-- Check icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-400 flex-shrink-0" viewBox="0 0 20 20"
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-400 shrink-0" viewBox="0 0 20 20"
             fill="currentColor">
             <path fill-rule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.707a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"

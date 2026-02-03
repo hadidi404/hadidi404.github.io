@@ -1,15 +1,15 @@
 <template>
-  <section id="service-area" class="py-20 sm:py-28 bg-gradient-to-br from-[#155DFC] via-[#1447E6] to-[#1C398E] text-white relative overflow-hidden">
-      <!-- Grid overlay -->
+  <section id="service-area" class="bg-linear-to-br from-[#155DFC] via-[#1447E6] to-[#1C398E] text-white relative overflow-hidden">
+
     <div
   class="absolute inset-0
         bg-[linear-gradient(rgba(255,255,255,0.18)_1px,transparent_1px),
             linear-gradient(90deg,rgba(255,255,255,0.18)_1px,transparent_1px)]
-        bg-[size:40px_40px]
+        bg-size-[40px_40px]
         pointer-events-none">
-</div>
+    </div>
 
-    <div class="m-auto max-w-5xl px-4 relative z-10">
+    <div class="m-auto max-w-5xl px-8 py-20 relative z-10">
       <!--Texts-->
       <div class="flex flex-col space-y-4 justify-center items-center">
         <p class="flex justify-center text-xl text-blue-700 font-semibold px-5 py-2 bg-blue-100 rounded-full items-center">WHERE WE SERVE</p>  

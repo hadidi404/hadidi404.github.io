@@ -1,10 +1,10 @@
 <template>
   <footer class="bg-[#101828]">
-    <div id="page-container" class="max-w-7xl mx-auto sm:px-6 lg:px-4 py-12 text-white">
+    <div id="page-container" class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12 text-white">
       <div id="upper" class="grid grid-cols-3 items-start text-left mb-8 gap-8 w-full">
         <div id="left" class="">
           <div
-            class="text-2xl font-bold bg-gradient-to-r from-[#51A2FF] to-[#00D3F2] bg-clip-text text-transparent mb-3">
+            class="text-2xl font-bold bg-linear-to-r from-[#51A2FF] to-[#00D3F2] bg-clip-text text-transparent mb-3">
             Rayson Tech Services</div>
           <p>Professional tech repair services for phones, laptops, and electronics. Quality repairs you can trust.</p>
         </div>
@@ -46,7 +46,7 @@
           </nav>
         </div>
       </div>
-      <div id="lower" class="border-t border-gray-700 pt-8 text-center text-sm pt-8">
+      <div id="lower" class="border-t border-gray-700 text-center text-sm pt-8">
         <p>© 2026 <span class="text-white font-bold">Rayson Tech Services</span>. All rights reserved.</p>
         <p>Serving Baguio City, Benguet & Infanta, Pangasinan</p>
       </div>

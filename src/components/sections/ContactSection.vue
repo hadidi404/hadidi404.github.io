@@ -1,6 +1,6 @@
 <template>
-  <section id="contact" class="flex flex-col items-center justify-center py-50 ">
-    <div id="page-container" class="mx-auto w-full max-w-5xl px-4 space-y-6">
+  <section id="contact" class="flex flex-col items-center justify-center">
+    <div id="page-container" class="mx-auto w-full max-w-5xl px-8 space-y-6 py-20 ">
 
       <div id="text-container" class="flex flex-col space-y-4 justify-center items-center">
         <p
@@ -25,7 +25,7 @@
         </div>
         <p>I'll get back to you as soon as possible with an honest diagnosis</p>
         <div class="w-full flex flex-col gap-7">
-          <div class="grid grid-cols-2 gap-6 w-full">
+          <div class="grid sm:grid-cols-1 lg:grid-cols-2 gap-6 w-full">
             <div id="card1" class="">
               <a href="tel:+639123456789"
                 class="group flex items-start gap-4 p-6 bg-white rounded-2xl border-2 border-gray-200 hover:border-blue-500 transition-all hover:shadow-lg">

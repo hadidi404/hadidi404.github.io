@@ -1,7 +1,7 @@
 <template>
   <section class="w-full">
     <div id="page-container"
-      class="max-w-7xl mx-auto flex flex-col items-center justify-center pt-50 space-y-4 px-5"
+      class="max-w-7xl mx-auto flex flex-col items-center justify-center py-20 space-y-4 px-8"
     >
       <p
         class="w-fit text-xl text-blue-700 font-semibold bg-blue-100 rounded-full items-center px-5 py-2"
@@ -14,7 +14,7 @@
       </p>
       <ServiceCard />
       <div
-        class="outline rounded-2xl mt-12 bg-blue-300 w-full h-20 flex items-center justify-center bg-gradient-to-r from-blue-50 to-cyan-50"
+        class="outline rounded-2xl mt-12 bg-blue-300 w-full h-20 flex items-center justify-center bg-linear-to-r from-blue-50 to-cyan-50"
       >
         <p class="text-normal text-gray-700">
           <span class="font-semibold text-gray-900"

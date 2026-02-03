@@ -3,10 +3,11 @@ import Navbar from './components/layout/Navbar.vue'
 import Footer from './components/layout/Footer.vue'
 import HomeSection from './components/sections/HomeSection.vue'
 import ServicesSection from './components/sections/ServicesSection.vue'
-import RepairsSection from './components/sections/RepairsSection.vue'
 import AboutSection from './components/sections/AboutSection.vue'
 import ContactSection from './components/sections/ContactSection.vue'
 import ServiceAreaSection from './components/sections/ServiceAreaSection.vue'
+import WhyChooseMe from './components/sections/WhyChooseMeSection.vue'
+import RecentRepairsSection from './components/sections/RecentRepairsSection.vue'
 </script>
 
 <template>
@@ -14,7 +15,8 @@ import ServiceAreaSection from './components/sections/ServiceAreaSection.vue'
   <main class="page">
     <HomeSection />
     <ServicesSection />
-    <RepairsSection />
+    <RecentRepairsSection />
+    <WhyChooseMe/>
     <AboutSection />
     <ServiceAreaSection />
     <ContactSection />

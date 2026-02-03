@@ -1,6 +1,6 @@
 <template>
   <section id="about">
-   <div class="mx-auto max-w-7xl px-4">
+   <div class="mx-auto max-w-7xl px-8 py-20">
     <div class="w-full grid lg:grid-cols-2 items-center gap-12">
 
       <!-- LEFT COLUMN -->
@@ -11,7 +11,7 @@
 
         <h1 class="text-5xl font-bold text-left">About Me</h1>
 
-        <div class="rounded-2xl border py-8 px-7 text-left space-y-4 text-lg leading-8 border border-gray-100 border-2 shadow-sm">
+        <div class="rounded-2xl py-8 px-7 text-left space-y-4 text-lg leading-8 border-gray-100 border-2 shadow-sm">
           <p>
             Hi, I'm Rayson. I've been repairing phones, laptops, and electronics for several years,
             and I take pride in doing careful, reliable work.
@@ -42,8 +42,7 @@
           src="https://images.unsplash.com/photo-1768633647910-7e6fb53e5b0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
           alt="Tech repair professional"
         />
-      </div>
-      <div class="h-50"></div> 
+      </div> 
     </div>
   </div>
 

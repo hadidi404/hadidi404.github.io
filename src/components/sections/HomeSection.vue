@@ -1,11 +1,11 @@
 <template>
-  <section id="home" class="relative overflow-hidden min-h-screen pt-[80px] flex items-center justify-center
-           bg-gradient-to-b from-blue-950 via-blue-900 to-blue-950">
+  <section id="home" class="py-20 relative overflow-hidden min-h-screen flex items-center justify-center
+           bg-linear-to-b from-blue-950 via-blue-900 to-blue-950">
 
-    <div id="page-container" class="max-w-6xl px-5">
-      <div class="relative z-10 w-full text-center text-lg font-medium text-gray-200 pb-28">
+    <div id="page-container" class="max-w-6xl px-8">
+      <div class="relative z-10 w-full text-center text-lg font-medium text-gray-200 pb-2">
         <div class="flex flex-col items-center space-y-6">
-          <div class="flex items-center gap-2 outline outline-2 outline-white/20 py-2.5 px-4 max-w-[460px]
+          <div class="w-fit flex items-center gap-2 outline-2 outline-white/20 py-3 px-5
                   rounded-full text-sm leading-tight bg-white/5 backdrop-blur">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check w-4 h-4 text-blue-300" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
 
@@ -13,10 +13,10 @@
           </div>
 
           <h1 class="font-bold sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-white">
-            Phone, Laptop, and Tech Repair<br />— <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#51A2FF] to-[#00D3F2]">
+            Phone, Laptop, and Tech Repair<br />— <span class="text-transparent bg-clip-text bg-linear-to-r from-[#51A2FF] to-[#00D3F2]">
   Done Right
 </span>
-
+  
           </h1>
 
           <h2 class="text-2xl text-white/75 max-w-4xl leading-normal">  
@@ -64,25 +64,9 @@
     </div>
 
 
-    <!-- <div class="absolute bottom-0 left-0 w-full leading-none">
-      <svg
-        class="block w-full h-[90px] md:h-[130px]"
-        viewBox="0 0 1440 120"
-        preserveAspectRatio="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M1440, 100 
-            C1200,120 960,120 720,80 
-            C480,40 240,20 0,40 
-            L0,120 
-            L1440,120 
-            Z"
-          fill="#ffffff"
-        />
-
-      </svg>
-    </div> -->
+    <div class="absolute bottom-0 left-0 w-full leading-none z-0">
+      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full"><path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#FFFFFF"></path></svg>
+    </div>
   </section>
 </template>
 
