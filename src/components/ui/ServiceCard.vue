@@ -35,7 +35,7 @@
         <div v-for="(service, sIndex) in group.services" :key="sIndex" class="flex items-center gap-2 outline-2 outline-white/20 py-2
                     w-full rounded-full text-sm leading-tight bg-white/5 backdrop-blur">
           <!-- Check icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-sky-400 shrink-0" viewBox="0 0 20 20"
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 shrink-0" viewBox="0 0 20 20"
             fill="currentColor">
             <path fill-rule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.707a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"

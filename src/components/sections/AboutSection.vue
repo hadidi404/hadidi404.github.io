@@ -9,7 +9,7 @@
           GET TO KNOW ME
         </p>
 
-        <h1 class="text-5xl font-bold text-left">About Me</h1>
+        <h1 class="text-4xl font-bold text-left">About Me</h1>
 
         <div class="rounded-2xl py-8 px-7 text-left space-y-4 text-lg leading-8 border-gray-100 border-2 shadow-sm">
           <p>

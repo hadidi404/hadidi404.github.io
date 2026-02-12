@@ -3,6 +3,7 @@
 @layer base {
   html {
     font-family: "Arimo", ui-sans-serif, system-ui, sans-serif;
+    scroll-behavior: smooth;
   }
 }
 * {
@@ -11,6 +12,10 @@
 
 body {
   background-color: white;
+}
+
+section[id] {
+  scroll-margin-top: 65px;
 }
 
 button:focus,
@@ -22,8 +27,8 @@ button:focus-visible {
 #app {
   max-width: 100%;
   margin: 0 auto;
-  text-align: center;
 }
+ 
 .page {
   padding-top: 64px;   
 }

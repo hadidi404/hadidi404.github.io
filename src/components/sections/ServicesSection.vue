@@ -1,14 +1,14 @@
 <template>
-  <section class="w-full">
+  <section id="services" class="w-full">
     <div id="page-container"
       class="max-w-7xl mx-auto flex flex-col items-center justify-center py-20 space-y-4 px-8"
     >
       <p
-        class="w-fit text-xl text-blue-700 font-semibold bg-blue-100 rounded-full items-center px-5 py-2"
+        class="w-fit text-xl text-[#155DFC] font-semibold bg-[#DBEAFE] rounded-full items-center px-5 py-2"
       >
         WHAT I OFFER
       </p>
-      <h1 class="text-4xl font-extrabold ">Services</h1>
+      <h1 class="text-4xl font-bold ">Services</h1>
       <p class="font-normal text-lg text-gray-600">
         Professional repair and maintenance for all your devices
       </p>

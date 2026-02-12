@@ -1,5 +1,6 @@
 <template>
-  <footer class="bg-[#101828]">
+  <footer class="relative bg-[#101828] overflow-hidden">
+    <div class="absolute w-full top-0 left-0 h-1 bg-linear-to-r from-[#155DFC] via-[#00B8DB] to-[#155DFC]"></div>
     <div id="page-container" class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12 text-white">
       <div id="upper" class="grid grid-cols-3 items-start text-left mb-8 gap-8 w-full">
         <div id="left" class="">

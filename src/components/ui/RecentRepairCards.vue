@@ -24,7 +24,7 @@
       </div>
 
       <div class="p-5">
-        <p class="text-gray-700 text-left text-lg leading-relaxed">
+        <p class="text-gray-700 text-left text-base leading-relaxed">
           {{ item.desc }}
         </p>
       </div>

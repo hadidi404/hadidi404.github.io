@@ -1,59 +1,40 @@
+<script setup>
+const links = [
+  { label: 'Home', id: 'home' },
+  { label: 'Services', id: 'services' },
+  { label: 'Repairs', id: 'recent-repairs' },
+  { label: 'About', id: 'about' },
+  { label: 'Contact', id: 'contact' }
+]
+
+function scrollTo(id) {
+  const el = document.getElementById(id)
+  if (!el) return
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+</script>
+
 <template>
-  <header class="fixed inset-x-0 top-0 z-1000 bg-white shadow-md">
-    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-8">
-      <div class="text-2xl font-bold bg-linear-to-r from-[#155DFC] to-[#193CB8] bg-clip-text text-transparent">
-        <p>Rayson Tech Services</p>
+  <nav class="fixed top-0 left-0 w-full z-50 bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
+      <div class="font-bold text-[24px] bg-linear-to-r from-[#155DFC]  to-[#193CB8] bg-clip-text text-transparent">
+        Rayson Tech
       </div>
 
-      <nav class="flex items-center gap-8">
-        <a
-          href="#home"
-          class="relative text-[18px] font-medium text-gray-800 transition-colors hover:text-gray-500
-                 after:absolute after:-bottom-1.25 after:left-0 after:h-0.5 after:w-0 after:bg-gray-800
-                 after:transition-all after:duration-300 hover:after:w-full"
+      <div class="hidden md:flex gap-6">
+        <button
+          v-for="l in links"
+          :key="l.id"
+          @click="scrollTo(l.id)"
+          class="text-base font-medium text-gray-700 hover:text-blue-600 transition"
         >
-          Home
-        </a>
-
-        <a
-          href="#services"
-          class="relative text-[18px] font-medium text-gray-800 transition-colors hover:text-gray-500
-                 after:absolute after:-bottom-1.25 after:left-0 after:h-0.5 after:w-0 after:bg-gray-800
-                 after:transition-all after:duration-300 hover:after:w-full"
-        >
-          Services
-        </a>
-
-        <a
-          href="#repairs"
-          class="relative text-[18px] font-medium text-gray-800 transition-colors hover:text-gray-500
-                 after:absolute after:-bottom-1.25 after:left-0 after:h-0.5 after:w-0 after:bg-gray-800
-                 after:transition-all after:duration-300 hover:after:w-full"
-        >
-          Repairs
-        </a>
-
-        <a
-          href="#about"
-          class="relative text-[18px] font-medium text-gray-800 transition-colors hover:text-gray-500
-                 after:absolute after:-bottom-1.25 after:left-0 after:h-0.5 after:w-0 after:bg-gray-800
-                 after:transition-all after:duration-300 hover:after:w-full"
-        >
-          About
-        </a>
-
-        <a
-          href="#contact"
-          class="relative text-[18px] font-medium text-gray-800 transition-colors hover:text-gray-500
-                 after:absolute after:-bottom-1.25 after:left-0 after:h-0.5 after:w-0 after:bg-gray-800
-                 after:transition-all after:duration-300 hover:after:w-full"
-        >
-          Contact
-        </a>
-      </nav>
+          {{ l.label }}
+        </button>
+      </div>
     </div>
-  </header>
+  </nav>
 </template>
+
 
 <script setup></script>
 

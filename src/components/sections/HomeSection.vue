@@ -7,26 +7,34 @@
         <div class="flex flex-col items-center space-y-6">
           <div class="w-fit flex items-center gap-2 outline-2 outline-white/20 py-3 px-5
                   rounded-full text-sm leading-tight bg-white/5 backdrop-blur">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check w-4 h-4 text-blue-300" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-circle-check w-4 h-4 text-blue-300" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
 
             <p class="font-xl text-[17px] text-white/90">Trusted by hundreds of satisfied customers</p>
           </div>
 
           <h1 class="font-bold sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-white">
-            Phone, Laptop, and Tech Repair<br />— <span class="text-transparent bg-clip-text bg-linear-to-r from-[#51A2FF] to-[#00D3F2]">
-  Done Right
-</span>
-  
+            Phone, Laptop, and Tech Repair<br />— <span
+              class="text-transparent bg-clip-text bg-linear-to-r from-[#51A2FF] to-[#00D3F2]">
+              Done Right
+            </span>
+
           </h1>
 
-          <h2 class="text-2xl text-white/75 max-w-4xl leading-normal">  
+          <h2 class="text-2xl text-white/75 max-w-4xl leading-normal">
             Get honest diagnostics and quality repairs for your devices. I take the time<br />
             to assess your tech properly and fix it right, so you can trust your device is<br />
             in good hands.
           </h2>
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <button class="group px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl hover:shadow-blue-500/50 flex items-center justify-center gap-2">
+            <button
+              @click="scrollToSection('services')"
+              class="group px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl hover:shadow-blue-500/50 flex items-center justify-center gap-2">
               <span>View Services</span>
 
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -40,6 +48,7 @@
 
 
             <button
+              @click="scrollToSection('contact')"
               class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl hover:bg-white/20 transition-all border border-white/20 hover:border-white/40">
               Contact Me
             </button>
@@ -65,12 +74,23 @@
 
 
     <div class="absolute bottom-0 left-0 w-full leading-none z-0">
-      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full"><path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#FFFFFF"></path></svg>
+      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
+        <path
+          d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+          fill="#FFFFFF"></path>
+      </svg>
     </div>
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+  function scrollToSection(page) {
+    const el = document.getElementById(page)
+    if (!el) return
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+</script>
 <style scoped>
 .hero-section {
   position: relative;

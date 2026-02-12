@@ -30,7 +30,7 @@
               <a href="tel:+639123456789"
                 class="group flex items-start gap-4 p-6 bg-white rounded-2xl border-2 border-gray-200 hover:border-blue-500 transition-all hover:shadow-lg">
                 <div
-                  class="w-12 h-12 bg-[#DBEAFE] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 transition-colors">
+                  class="w-12 h-12 bg-[#DBEAFE] rounded-xl flex items-center justify-center shrink-0 group-hover:bg-blue-600 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-phone w-6 h-6 text-blue-600 group-hover:text-white transition-colors"
@@ -51,7 +51,7 @@
               <a href="https://m.me/raysontechservices" target="_blank" rel="noopener noreferrer"
                 class="group flex items-start gap-4 p-6 bg-white rounded-2xl border-2 border-gray-200 hover:border-blue-500 transition-all hover:shadow-lg">
                 <div
-                  class="w-12 h-12 bg-[#DBEAFE] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 transition-colors">
+                  class="w-12 h-12 bg-[#DBEAFE] rounded-xl flex items-center justify-center shrink-0 group-hover:bg-blue-600 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-message-circle w-6 h-6 text-blue-600 group-hover:text-white transition-colors"
