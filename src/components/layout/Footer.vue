@@ -7,12 +7,12 @@
           <div
             class="text-2xl font-bold bg-linear-to-r from-[#51A2FF] to-[#00D3F2] bg-clip-text text-transparent mb-3">
             Rayson Tech Services</div>
-          <p>Professional tech repair services for phones, laptops, and electronics. Quality repairs you can trust.</p>
+          <p class="text-gray-300">Professional tech repair services for phones, laptops, and electronics. Quality repairs you can trust.</p>
         </div>
         <div id="center" class="flex flex-col">
           <h3 class="text-white font-semibold mb-3">Quick Links</h3>
           <nav>
-            <ul>
+            <ul class="text-gray-300">
               <li>Services</li>
               <li>Our Work</li>
               <li>About Me</li>
@@ -23,7 +23,7 @@
         <div id="right">
           <h3 class="text-white font-semibold mb-3">Contact</h3>
           <nav>
-            <ul class="space-y-2 text-sm">
+            <ul class="space-y-2 text-sm ">
               <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                   stroke-linejoin="round" class="lucide lucide-phone w-4 h-4 text-blue-400" aria-hidden="true">
@@ -47,8 +47,8 @@
           </nav>
         </div>
       </div>
-      <div id="lower" class="border-t border-gray-700 text-center text-sm pt-8">
-        <p>© 2026 <span class="text-white font-bold">Rayson Tech Services</span>. All rights reserved.</p>
+      <div id="lower" class="border-t text-gray-300 border-gray-700 text-center text-sm pt-8">
+        <p >© 2026 <span class="text-white font-bold">Rayson Tech Services</span>. All rights reserved.</p>
         <p>Serving Baguio City, Benguet & Infanta, Pangasinan</p>
       </div>
     </div>
