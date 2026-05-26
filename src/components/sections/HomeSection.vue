@@ -71,11 +71,11 @@
       </div>
     </div>
 
-    <div class="absolute bottom-0 left-0 w-full leading-none pointer-events-none">
-      <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
+    <div class="absolute bottom-0 left-0 w-full leading-none pointer-events-none sm:translate-y-10">
+      <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-12 sm:h-24 lg:h-44">
         <path
-          d="M0 60L60 54C120 48 240 36 360 32C480 28 600 32 720 36C840 40 960 40 1080 38C1200 36 1320 32 1380 30L1440 28V60H0Z"
-          fill="#f8fafc"></path>
+          d="M0 40C480 5 960 58 1440 40V60H0Z"
+          fill="#ffffff"></path>
       </svg>
     </div>
   </section>
