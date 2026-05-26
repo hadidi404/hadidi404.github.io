@@ -1,118 +1,101 @@
 <template>
-  <section id="home" class="py-20 relative overflow-hidden min-h-screen flex items-center justify-center
-           bg-linear-to-b from-blue-950 via-blue-900 to-blue-950">
+  <section id="home" class="hero relative overflow-hidden min-h-screen flex items-center justify-center py-28">
 
-    <div id="page-container" class="max-w-6xl px-8">
-      <div class="relative z-10 w-full text-center text-lg font-medium text-gray-200 pb-2">
-        <div class="flex flex-col items-center space-y-6">
-          <div class="w-fit flex items-center gap-2 outline-2 outline-white/20 py-3 px-5
-                  rounded-full text-sm leading-tight bg-white/5 backdrop-blur">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="lucide lucide-circle-check w-4 h-4 text-blue-300" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="m9 12 2 2 4-4"></path>
+    <div class="dot-grid absolute inset-0 pointer-events-none"></div>
+
+    <div class="absolute -top-32 -right-32 w-175 h-175 rounded-full bg-blue-600/30 blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-0 -left-32 w-125 h-125 rounded-full bg-indigo-600/25 blur-[100px] pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-175 h-75 rounded-full bg-cyan-700/20 blur-[80px] pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-8 w-full text-center">
+      <div class="flex flex-col items-center space-y-6">
+
+        <div v-animate class="w-fit flex items-center gap-2 border border-blue-500/30 py-2.5 px-5 rounded-full text-sm bg-blue-900/40">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-400" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+          <p class="text-[14px] font-medium text-blue-300">Trusted by hundreds of satisfied customers</p>
+        </div>
+
+        <h1 v-animate="100" class="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-white">
+          Phone, Laptop &amp; Tech Repair<br class="hidden sm:block" />
+          <span class="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-400">
+            — Done Right
+          </span>
+        </h1>
+
+        <p v-animate="200" class="text-lg text-slate-400 max-w-xl leading-relaxed">
+          Honest diagnostics and quality repairs for all your devices.
+          Fixed right the first time — no upselling, no guesswork.
+        </p>
+
+        <div v-animate="300" class="flex flex-col sm:flex-row gap-4 justify-center">
+          <button
+            @click="scrollToSection('services')"
+            class="group px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-500 transition-all
+                   shadow-lg shadow-blue-900/50
+                   flex items-center justify-center gap-2 font-medium">
+            View Services
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="w-4 h-4 transition-transform group-hover:translate-x-1" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
             </svg>
+          </button>
+          <button
+            @click="scrollToSection('contact')"
+            class="px-8 py-4 bg-white/10 text-white rounded-xl hover:bg-white/20
+                   transition-all border border-white/20 hover:border-white/30 font-medium">
+            Contact Me
+          </button>
+        </div>
 
-            <p class="font-xl text-[17px] text-white/90">Trusted by hundreds of satisfied customers</p>
+        <div v-animate="400" class="grid grid-cols-3 gap-4 sm:gap-12 max-w-xl mx-auto pt-10 mt-4 border-t border-white/10">
+          <div>
+            <div class="text-2xl sm:text-4xl font-bold text-white">7<span class="text-blue-400">+</span></div>
+            <div class="text-xs sm:text-sm text-slate-400 mt-1 uppercase tracking-wide">Years Exp.</div>
           </div>
-
-          <h1 class="font-bold sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-white">
-            Phone, Laptop, and Tech Repair<br />— <span
-              class="text-transparent bg-clip-text bg-linear-to-r from-[#51A2FF] to-[#00D3F2]">
-              Done Right
-            </span>
-
-          </h1>
-
-          <h2 class="text-2xl text-white/75 max-w-4xl leading-normal">
-            Get honest diagnostics and quality repairs for your devices. I take the time<br />
-            to assess your tech properly and fix it right, so you can trust your device is<br />
-            in good hands.
-          </h2>
-
-          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <button
-              @click="scrollToSection('services')"
-              class="group px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl hover:shadow-blue-500/50 flex items-center justify-center gap-2">
-              <span>View Services</span>
-
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5
-                        transition-transform
-                        group-hover:translate-x-1" aria-hidden="true">
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </button>
-
-
-            <button
-              @click="scrollToSection('contact')"
-              class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl hover:bg-white/20 transition-all border border-white/20 hover:border-white/40">
-              Contact Me
-            </button>
+          <div>
+            <div class="text-2xl sm:text-4xl font-bold text-white">200<span class="text-blue-400">+</span></div>
+            <div class="text-xs sm:text-sm text-slate-400 mt-1 uppercase tracking-wide">Repaired</div>
           </div>
-
-          <div class="grid grid-cols-3 gap-12 max-w-2xl mx-auto pt-10 mt-10 border-t border-white/15">
-            <div>
-              <div class="text-4xl font-bold text-sky-300 mb-1">7+</div>
-              <div class="text-md text-white/70">Years Experience</div>
-            </div>
-            <div>
-              <div class="text-4xl font-bold text-sky-300 mb-1">200+</div>
-              <div class="text-md text-white/70">Devices Repaired</div>
-            </div>
-            <div>
-              <div class="text-4xl font-bold text-sky-300 mb-1">98%</div>
-              <div class="text-md text-white/70">Success Rate</div>
-            </div>
+          <div>
+            <div class="text-2xl sm:text-4xl font-bold text-white">98<span class="text-blue-400">%</span></div>
+            <div class="text-xs sm:text-sm text-slate-400 mt-1 uppercase tracking-wide">Success Rate</div>
           </div>
         </div>
+
       </div>
     </div>
 
-
-    <div class="absolute bottom-0 left-0 w-full leading-none z-0">
-      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
+    <div class="absolute bottom-0 left-0 w-full leading-none pointer-events-none">
+      <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
         <path
-          d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
-          fill="#FFFFFF"></path>
+          d="M0 60L60 54C120 48 240 36 360 32C480 28 600 32 720 36C840 40 960 40 1080 38C1200 36 1320 32 1380 30L1440 28V60H0Z"
+          fill="#f8fafc"></path>
       </svg>
     </div>
   </section>
 </template>
 
 <script setup>
-  function scrollToSection(page) {
-    const el = document.getElementById(page)
-    if (!el) return
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
+function scrollToSection(id) {
+  const el = document.getElementById(id)
+  if (!el) return
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
 </script>
+
 <style scoped>
-.hero-section {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(to bottom,
-      #020617,
-      /* blue-950 */
-      #0f172a,
-      /* blue-900 */
-      #020617);
+.hero {
+  background: linear-gradient(135deg, #1e3a6e 0%, #152a50 100%);
 }
 
-/* grid overlay */
-.hero-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.2;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.10) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.10) 1px, transparent 1px);
-  background-size: 64px 64px;
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 </style>

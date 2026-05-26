@@ -1,4 +1,7 @@
 <script setup>
+import { ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
 const links = [
   { label: 'Home', id: 'home' },
   { label: 'Services', id: 'services' },
@@ -7,18 +10,48 @@ const links = [
   { label: 'Contact', id: 'contact' }
 ]
 
-function scrollTo(id) {
+const menuOpen = ref(false)
+const activeSection = ref('home')
+const route = useRoute()
+const router = useRouter()
+
+let scrollHandler = null
+
+onMounted(() => {
+  scrollHandler = () => {
+    const scrollY = window.scrollY + 80
+    let current = links[0].id
+    for (const { id } of links) {
+      const el = document.getElementById(id)
+      if (el && el.offsetTop <= scrollY) current = id
+    }
+    activeSection.value = current
+  }
+  window.addEventListener('scroll', scrollHandler, { passive: true })
+  scrollHandler()
+})
+
+onBeforeUnmount(() => {
+  if (scrollHandler) window.removeEventListener('scroll', scrollHandler)
+})
+
+async function scrollTo(id) {
+  menuOpen.value = false
+  if (route.path !== '/') {
+    await router.push('/')
+    await nextTick()
+  }
   const el = document.getElementById(id)
-  if (!el) return
-  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 </script>
 
 <template>
-  <nav class="fixed top-0 left-0 w-full z-50 bg-white border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
-      <div class="font-bold text-[24px] bg-linear-to-r from-[#155DFC]  to-[#193CB8] bg-clip-text text-transparent">
-        Rayson Tech
+  <nav class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-gray-200/60 shadow-sm">
+    <div class="max-w-7xl mx-auto h-16 flex items-center justify-between px-4 sm:px-8">
+
+      <div class="font-bold text-xl text-blue-600">
+        Rayson Tech Services
       </div>
 
       <div class="hidden md:flex gap-6">
@@ -26,22 +59,53 @@ function scrollTo(id) {
           v-for="l in links"
           :key="l.id"
           @click="scrollTo(l.id)"
-          class="text-base font-medium text-gray-700 hover:text-blue-600 transition"
+          :class="[
+            'text-base font-medium transition-colors duration-200 focus:outline-none',
+            route.path === '/' && activeSection === l.id
+              ? 'text-blue-600 font-semibold'
+              : 'text-gray-600 hover:text-blue-600'
+          ]"
         >
           {{ l.label }}
         </button>
       </div>
+
+      <button
+        class="md:hidden p-2 text-gray-600 focus:outline-none"
+        @click="menuOpen = !menuOpen"
+        aria-label="Toggle menu"
+      >
+        <svg v-if="!menuOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div v-if="menuOpen" class="md:hidden bg-white border-t border-gray-100 px-8 pb-4 flex flex-col">
+      <button
+        v-for="l in links"
+        :key="l.id"
+        @click="scrollTo(l.id)"
+        :class="[
+          'text-left py-3 text-base font-medium border-b border-gray-100 last:border-0 focus:outline-none transition-colors duration-200',
+          route.path === '/' && activeSection === l.id
+            ? 'text-blue-600 font-semibold'
+            : 'text-gray-600 hover:text-blue-600'
+        ]"
+      >
+        {{ l.label }}
+      </button>
     </div>
   </nav>
 </template>
 
-
-<script setup></script>
-
-
-  <script setup>
-  </script>
-
-  <style scoped>
-   
-  </style>
+<style scoped>
+button:focus,
+button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+</style>

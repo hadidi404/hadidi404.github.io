@@ -1,30 +1,14 @@
 <script setup>
 import Navbar from './components/layout/Navbar.vue'
 import Footer from './components/layout/Footer.vue'
-import HomeSection from './components/sections/HomeSection.vue'
-import ServicesSection from './components/sections/ServicesSection.vue'
-import AboutSection from './components/sections/AboutSection.vue'
-import ContactSection from './components/sections/ContactSection.vue'
-import ServiceAreaSection from './components/sections/ServiceAreaSection.vue'
-import WhyChooseMe from './components/sections/WhyChooseMeSection.vue'
-import RecentRepairsSection from './components/sections/RecentRepairsSection.vue'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
   <Navbar />
   <main class="page">
-    <HomeSection />
-    <ServicesSection />
-    <RecentRepairsSection />
-    <WhyChooseMe/>
-    <AboutSection />
-    <ServiceAreaSection />
-    <ContactSection />
-    <Footer />
+    <RouterView />
   </main>
-  
+  <Footer />
 </template>
 
-<style scoped>
-  
-</style>

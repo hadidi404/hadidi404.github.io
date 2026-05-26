@@ -5,7 +5,6 @@
       :key="index"
       class="flex gap-4 items-start p-6 rounded-2xl border border-white/20 hover:shadow-lg transition bg-white/8"
     >
-      <!-- Icon -->
       <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-blue-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -25,14 +24,12 @@
         </svg>
       </div>
 
-      <!-- Location Info -->
       <div>
-        <h2 class="text-2xl font-bold">{{ location.name }}</h2>
-        <p class="text-[#BEDBFF] text-left">{{ location.desc }}</p>
+        <h2 class="text-lg sm:text-xl font-bold">{{ location.name }}</h2>
+        <p class="text-sm sm:text-base text-[#BEDBFF] text-left">{{ location.desc }}</p>
       </div>
     </div>
   </div>
-  
 </template>
 
 <script setup>
@@ -47,23 +44,17 @@ const locations = [
         "M15 10a3 3 0 1 1-6 0a3 3 0 0 1 6 0"
       ]
     }
-
   },
   {
     name: "Infanta",
     desc: "Pangasinan",
-   icon: {
+    icon: {
       viewBox: "0 0 24 24",
       paths: [
         "M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0",
         "M15 10a3 3 0 1 1-6 0a3 3 0 0 1 6 0"
       ]
     }
-
   }
 ]
 </script>
-
-
-<style scoped>
-</style>

@@ -1,27 +1,18 @@
 <template>
   <section id="services" class="w-full">
-    <div id="page-container"
-      class="max-w-7xl mx-auto flex flex-col items-center justify-center py-20 space-y-4 px-8"
-    >
-      <p
-        class="w-fit text-xl text-[#155DFC] font-semibold bg-[#DBEAFE] rounded-full items-center px-5 py-2"
-      >
-        WHAT I OFFER
-      </p>
-      <h1 class="text-4xl font-bold ">Services</h1>
-      <p class="font-normal text-lg text-gray-600">
-        Professional repair and maintenance for all your devices
-      </p>
+    <div class="max-w-7xl mx-auto flex flex-col items-center justify-center py-12 sm:py-20 space-y-4 px-8">
+      <div v-animate>
+        <SectionTitle
+          badge="WHAT I OFFER"
+          title="Services"
+          subtitle="Professional repair and maintenance for all your devices"
+        />
+      </div>
       <ServiceCard />
-      <div
-        class="outline rounded-2xl mt-12 bg-blue-300 w-full h-20 flex items-center justify-center bg-linear-to-r from-blue-50 to-cyan-50"
-      >
-        <p class="text-normal text-gray-700">
-          <span class="font-semibold text-gray-900"
-            >Don't see your issue listed?</span
-          >
-          Feel free to contact me—I handle a wide range of repairs and I'm happy
-          to help!
+      <div class="rounded-2xl w-full flex items-center justify-center bg-linear-to-r from-blue-50 to-cyan-50 border border-blue-100 py-5 px-6">
+        <p class="text-sm sm:text-base text-gray-700 text-center">
+          <span class="font-semibold text-gray-900">Don't see your issue listed?</span>
+          {{ ' ' }}Feel free to contact me—I handle a wide range of repairs and I'm happy to help!
         </p>
       </div>
     </div>
@@ -29,7 +20,6 @@
 </template>
 
 <script setup>
-import ServiceCard from "../ui/ServiceCard.vue";
+import ServiceCard from '../ui/ServiceCard.vue'
+import SectionTitle from '../ui/SectionTitle.vue'
 </script>
-
-<style scoped></style>
