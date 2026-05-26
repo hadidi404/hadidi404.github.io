@@ -64,10 +64,6 @@
               </div>
             </a>
           </div>
-          <div class="w-full text-center bg-[#FEFCE8] rounded-xl p-4 border border-[#FFF085]">
-            <p class="text-sm text-gray-700"><span class="font-semibold text-gray-900">💡 Tip:</span> Include your device
-              model and issue description for faster assessment</p>
-          </div>
         </div>
       </div>
 

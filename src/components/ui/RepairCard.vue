@@ -25,7 +25,7 @@
           {{ card.title }}
         </h3>
       </div>
-      <p class="text-sm lg:text-base mt-1 lg:mt-3 text-gray-600 sm:text-center leading-relaxed">
+      <p class="text-sm sm:text-base mt-1 sm:mt-3 text-gray-600 sm:text-center leading-relaxed">
         {{ card.desc }}
       </p>
     </div>

@@ -9,8 +9,8 @@
         />
       </div>
       <ServiceCard />
-      <div class="rounded-2xl w-full flex items-center justify-center bg-linear-to-r from-blue-50 to-cyan-50 border border-blue-100 py-5 px-6">
-        <p class="text-sm sm:text-base text-gray-700 text-center">
+      <div class="rounded-2xl w-full flex items-center justify-center bg-linear-to-r from-blue-50 to-cyan-50 border border-blue-100 p-2 sm:p-6 lg:p-3">
+        <p class="text-xs sm:text-base text-gray-700 text-center">
           <span class="font-semibold text-gray-900">Don't see your issue listed?</span>
           {{ ' ' }}Feel free to contact me—I handle a wide range of repairs and I'm happy to help!
         </p>

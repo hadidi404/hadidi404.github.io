@@ -19,8 +19,8 @@
         />
       </div>
       <LocationCard />
-      <div class="mt-4 sm:mt-8 outline rounded-2xl p-4 sm:p-6 outline-white/20 bg-white/8">
-        <p class="text-center text-sm sm:text-base"><span class="font-semibold">Not sure if I can reach you?</span> Send me a message and let's find out!</p>
+      <div class="mt-3 sm:mt-4 lg:mt-4 outline rounded-2xl p-2 sm:p-6 lg:p-3 outline-white/20 bg-white/8">
+        <p class="text-center text-xs sm:text-base"><span class="font-semibold">Not sure if I can reach you?</span> Send me a message and let's find out!</p>
       </div>
     </div>
 
