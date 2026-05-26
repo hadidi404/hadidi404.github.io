@@ -1,11 +1,11 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-12">
+  <div class="grid grid-cols-2 gap-4 sm:gap-8 pt-12">
     <div
       v-for="(location, index) in locations"
       :key="index"
-      class="flex gap-4 items-start p-6 rounded-2xl border border-white/20 hover:shadow-lg transition bg-white/8"
+      class="flex gap-3 sm:gap-4 items-center p-4 sm:p-6 rounded-2xl border border-white/20 hover:shadow-lg transition bg-white/8"
     >
-      <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-blue-500">
+      <div class="flex items-center justify-center w-10 h-10 sm:w-14 sm:h-14 rounded-xl bg-blue-500 shrink-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           :viewBox="location.icon.viewBox"
@@ -14,7 +14,7 @@
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="w-7 h-7 text-white"
+          class="w-5 h-5 sm:w-7 sm:h-7 text-white"
         >
           <path
             v-for="(path, pIndex) in location.icon.paths"

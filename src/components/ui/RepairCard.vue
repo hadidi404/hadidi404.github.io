@@ -1,16 +1,16 @@
 <template>
-  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-10">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-10">
     <div
       v-for="(card, i) in trustCards"
       :key="card.title"
       v-animate="i * 120"
-      class="rounded-2xl border border-gray-200 bg-white p-2 sm:p-8 shadow-sm transition-all duration-700 ease-in-out hover:-translate-y-1 hover:shadow-xl"
+      class="rounded-2xl border border-gray-200 bg-white px-3 py-3 sm:p-8 shadow-sm transition-all duration-700 ease-in-out hover:-translate-y-1 hover:shadow-xl"
     >
-      <div class="mb-4 flex justify-center">
-        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-4">
+      <div class="flex items-center gap-3 sm:flex-col sm:items-center sm:gap-0 mb-2 sm:mb-0">
+        <div class="shrink-0 sm:mb-4 rounded-2xl border border-gray-200 bg-gray-50 p-2 sm:p-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-7 w-7 text-blue-600"
+            class="h-5 w-5 sm:h-7 sm:w-7 text-blue-600"
             :viewBox="card.icon.viewBox"
             fill="none"
             stroke="currentColor"
@@ -21,11 +21,11 @@
             <path v-for="(d, i) in card.icon.paths" :key="i" :d="d" />
           </svg>
         </div>
+        <h3 class="text-base sm:text-lg font-bold text-gray-900 sm:text-center sm:mb-0">
+          {{ card.title }}
+        </h3>
       </div>
-      <h3 class="text-lg font-bold text-gray-900 text-center">
-        {{ card.title }}
-      </h3>
-      <p class="mt-3 text-gray-600 text-center leading-relaxed">
+      <p class="text-sm lg:text-base mt-1 lg:mt-3 text-gray-600 sm:text-center leading-relaxed">
         {{ card.desc }}
       </p>
     </div>
@@ -36,7 +36,7 @@
 const trustCards = [
   {
     title: "Honest Assessment",
-    desc: "I tell you exactly what's wrong and whether it's worth fixing. No upselling, just honest answers.",
+    desc: "I diagnose the problem clearly and let you know if a repair is worth the cost before proceeding.",
     icon: {
       viewBox: "0 0 24 24",
       paths: [
@@ -47,7 +47,7 @@ const trustCards = [
   },
   {
     title: "Quality Parts",
-    desc: "Only reliable, tested parts are used in your device so that it continues to perform well and last.",
+    desc: "I source reliable replacement parts so your device works just like it should after every repair.",
     icon: {
       viewBox: "0 0 24 24",
       paths: [
@@ -57,7 +57,7 @@ const trustCards = [
   },
   {
     title: "Careful Repair Process",
-    desc: "Each repair gets my full attention. I follow proper steps and test everything before returning it.",
+    desc: "Every device is handled with care, repaired step by step, and fully tested before it's returned.",
     icon: {
       viewBox: "0 0 24 24",
       paths: [
@@ -68,7 +68,7 @@ const trustCards = [
   },
   {
     title: "Clear Communication",
-    desc: "I keep you updated during the repair in plain language so you always know exactly what's happening.",
+    desc: "You'll get updates at every stage in plain language, so there are no surprises when you pick up.",
     icon: {
       viewBox: "0 0 24 24",
       paths: ["M7.9 20A9 9 0 1 0 4 16.1L2 22Z"],

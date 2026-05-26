@@ -1,6 +1,6 @@
 <template>
   <section id="why-choose-me">
-    <div class="flex flex-col items-center max-w-7xl mx-auto space-y-4 px-4 sm:px-8 py-12 sm:py-20">
+    <div class="flex flex-col items-center max-w-7xl mx-auto space-y-4 px-4 sm:px-8 py-8 sm:py-20">
       <div v-animate>
         <SectionTitle
           badge="MY COMMITMENT"
