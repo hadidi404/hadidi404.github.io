@@ -1,6 +1,6 @@
 <template>
   <section id="recent-repairs">
-    <div class="max-w-7xl mx-auto space-y-4 px-8 py-12 sm:py-20">
+    <div class="max-w-7xl mx-auto space-y-4 px-4 sm:px-8 py-12 sm:py-20">
       <div class="flex flex-col items-center justify-center space-y-4">
         <div v-animate>
           <SectionTitle

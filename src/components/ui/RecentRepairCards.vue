@@ -1,12 +1,49 @@
 <template>
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+  <div class="sm:hidden">
+    <div class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth px-1">
+      <div
+        v-for="(item, index) in services"
+        :key="index"
+        class="snap-start shrink-0 w-[78%] group bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100"
+      >
+        <div class="aspect-4/3 overflow-hidden relative">
+          <img
+            :src="item.pic"
+            :alt="item.desc"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="absolute top-3 left-3">
+            <span class="bg-blue-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg">
+              {{ item.title }}
+            </span>
+          </div>
+        </div>
+        <div class="p-4">
+          <p class="text-gray-700 text-left text-sm leading-relaxed">{{ item.desc }}</p>
+        </div>
+      </div>
+    </div>
+
+    <RouterLink
+      to="/repairs"
+      class="mt-4 flex items-center justify-center gap-2 w-full py-3 rounded-xl border-2 border-dashed border-blue-200 text-blue-600 font-medium text-sm hover:bg-blue-50 transition-colors"
+    >
+      View All Repairs
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
+    </RouterLink>
+  </div>
+
+  <div class="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
     <div
       v-for="(item, index) in visibleServices"
       :key="index"
       v-animate="index * 100"
       class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-[box-shadow,border-color] duration-700 ease-in-out border border-gray-100 hover:border-blue-200"
     >
-      <!-- Image -->
       <div class="aspect-4/3 overflow-hidden relative">
         <img
           :src="item.pic"
@@ -26,7 +63,6 @@
       </div>
     </div>
 
-    <!-- View All CTA card -->
     <RouterLink
       to="/repairs"
       v-animate="visibleServices.length * 100"
@@ -90,5 +126,3 @@ const services = [
 
 const visibleServices = computed(() => services.slice(0, 5))
 </script>
-
-<style scoped></style>

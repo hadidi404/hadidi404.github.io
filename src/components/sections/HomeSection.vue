@@ -7,7 +7,7 @@
     <div class="absolute bottom-0 -left-32 w-125 h-125 rounded-full bg-indigo-600/25 blur-[100px] pointer-events-none"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-175 h-75 rounded-full bg-cyan-700/20 blur-[80px] pointer-events-none"></div>
 
-    <div class="relative z-10 max-w-6xl mx-auto px-8 w-full text-center">
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 w-full text-center">
       <div class="flex flex-col items-center space-y-6">
 
         <div v-animate class="w-fit flex items-center gap-2 border border-blue-500/30 py-2.5 px-5 rounded-full text-sm bg-blue-900/40">
@@ -28,15 +28,15 @@
 
         <p v-animate="200" class="text-lg text-slate-400 max-w-xl leading-relaxed">
           Honest diagnostics and quality repairs for all your devices.
-          Fixed right the first time — no upselling, no guesswork.
+          Fixed right the first time, with no upselling and no guesswork.
         </p>
 
         <div v-animate="300" class="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             @click="scrollToSection('services')"
-            class="group px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-500 transition-all
+            class="group px-6 py-3 sm:px-8 sm:py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-500 transition-all
                    shadow-lg shadow-blue-900/50
-                   flex items-center justify-center gap-2 font-medium">
+                   flex items-center justify-center gap-2 font-medium text-sm sm:text-base">
             View Services
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -47,8 +47,8 @@
           </button>
           <button
             @click="scrollToSection('contact')"
-            class="px-8 py-4 bg-white/10 text-white rounded-xl hover:bg-white/20
-                   transition-all border border-white/20 hover:border-white/30 font-medium">
+            class="px-6 py-3 sm:px-8 sm:py-4 bg-white/10 text-white rounded-xl hover:bg-white/20
+                   transition-all border border-white/20 hover:border-white/30 font-medium text-sm sm:text-base">
             Contact Me
           </button>
         </div>

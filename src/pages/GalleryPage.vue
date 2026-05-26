@@ -1,7 +1,6 @@
 <template>
-  <!-- Hero header -->
   <section class="bg-gradient-to-br from-[#1e3a6e] to-[#152a50] pt-24 pb-16">
-    <div class="max-w-7xl mx-auto px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
 
       <RouterLink
         to="/"
@@ -40,11 +39,9 @@
     </div>
   </section>
 
-  <!-- Gallery body -->
   <section class="bg-gray-50 py-10 sm:py-14 min-h-[60vh]">
-    <div class="max-w-7xl mx-auto px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
 
-      <!-- Category filter -->
       <div class="flex gap-2 flex-wrap mb-10">
         <button
           v-for="cat in categories"
@@ -60,7 +57,6 @@
         </button>
       </div>
 
-      <!-- Grid -->
       <div v-if="filteredRepairs.length" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <div
           v-for="(item, index) in filteredRepairs"
@@ -69,9 +65,7 @@
           @click="openModal(index)"
           class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 hover:border-blue-100 cursor-pointer group"
         >
-          <!-- Image area -->
           <div class="relative aspect-4/3 overflow-hidden bg-gray-100">
-            <!-- Before image -->
             <img
               :src="item.before"
               :alt="`${item.title} — before`"
@@ -80,7 +74,6 @@
               loading="lazy"
               decoding="async"
             />
-            <!-- After image -->
             <img
               :src="item.after"
               :alt="`${item.title} — after`"
@@ -90,7 +83,6 @@
               decoding="async"
             />
 
-            <!-- Hover expand hint -->
             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-all duration-300 flex items-center justify-center">
               <div class="opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition-all duration-300 bg-white rounded-full p-3 shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -99,7 +91,6 @@
               </div>
             </div>
 
-            <!-- State badge -->
             <div class="absolute top-3 left-3 pointer-events-none">
               <span
                 class="text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider transition-colors duration-300"
@@ -109,14 +100,12 @@
               </span>
             </div>
 
-            <!-- Category badge -->
             <div class="absolute top-3 right-3 pointer-events-none">
               <span class="bg-black/40 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full">
                 {{ item.category }}
               </span>
             </div>
 
-            <!-- Toggle pill -->
             <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1 bg-black/50 backdrop-blur-sm rounded-full p-1">
               <button
                 @click.stop="showAfter[item.id] = false"
@@ -135,7 +124,6 @@
             </div>
           </div>
 
-          <!-- Card body -->
           <div class="p-5 space-y-1.5">
             <h3 class="font-bold text-gray-900 text-lg leading-snug">{{ item.title }}</h3>
             <p class="text-sm font-medium text-blue-600">{{ item.device }}</p>
@@ -144,7 +132,6 @@
         </div>
       </div>
 
-      <!-- Empty state -->
       <div v-else class="flex flex-col items-center justify-center py-24 text-center">
         <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-4">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -160,9 +147,8 @@
     </div>
   </section>
 
-  <!-- CTA -->
   <section class="bg-white border-t border-gray-100 py-10 sm:py-16">
-    <div class="max-w-2xl mx-auto px-8 text-center space-y-5">
+    <div class="max-w-2xl mx-auto px-4 sm:px-8 text-center space-y-5">
       <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Ready to fix your device?</h2>
       <p class="text-gray-500 text-lg">Get in touch and I'll get it sorted — honest pricing, quality results.</p>
       <RouterLink
@@ -177,7 +163,6 @@
     </div>
   </section>
 
-  <!-- Modal -->
   <Teleport to="body">
     <Transition name="modal">
       <div
@@ -187,7 +172,6 @@
       >
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
 
-          <!-- Modal header -->
           <div class="flex items-center justify-between px-6 pt-5 pb-4 border-b border-gray-100">
             <div>
               <h2 class="text-xl font-bold text-gray-900">{{ selectedItem.title }}</h2>
@@ -205,7 +189,6 @@
             </div>
           </div>
 
-          <!-- Images side by side -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 p-1">
             <div class="relative">
               <div class="aspect-4/3 overflow-hidden rounded-xl bg-gray-100">
@@ -233,12 +216,10 @@
             </div>
           </div>
 
-          <!-- Description -->
           <div class="px-6 py-5">
             <p class="text-gray-600 leading-relaxed">{{ selectedItem.desc }}</p>
           </div>
 
-          <!-- Navigation -->
           <div class="flex items-center justify-between px-6 pb-5 pt-1 border-t border-gray-100">
             <button
               @click="prevItem"
@@ -278,7 +259,6 @@ const selectedIndex = ref(-1)
 
 const categories = ['All', 'Phone', 'Laptop', 'Tablet', 'Desktop']
 
-// Replace before/after URLs with your own photos.
 const repairs = [
   {
     id: 1,

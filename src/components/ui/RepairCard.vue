@@ -1,10 +1,10 @@
 <template>
-  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-10">
     <div
       v-for="(card, i) in trustCards"
       :key="card.title"
       v-animate="i * 120"
-      class="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition-all duration-700 ease-in-out hover:-translate-y-1 hover:shadow-xl"
+      class="rounded-2xl border border-gray-200 bg-white p-2 sm:p-8 shadow-sm transition-all duration-700 ease-in-out hover:-translate-y-1 hover:shadow-xl"
     >
       <div class="mb-4 flex justify-center">
         <div class="rounded-2xl border border-gray-200 bg-gray-50 p-4">
@@ -36,7 +36,7 @@
 const trustCards = [
   {
     title: "Honest Assessment",
-    desc: "I will tell you exactly what is wrong and whether it is worth repairing—no upselling, just honest advice.",
+    desc: "I tell you exactly what's wrong and whether it's worth fixing. No upselling, just honest answers.",
     icon: {
       viewBox: "0 0 24 24",
       paths: [
@@ -47,7 +47,7 @@ const trustCards = [
   },
   {
     title: "Quality Parts",
-    desc: "I use reliable, tested components to ensure your device works properly and lasts.",
+    desc: "Only reliable, tested parts are used in your device so that it continues to perform well and last.",
     icon: {
       viewBox: "0 0 24 24",
       paths: [
@@ -57,7 +57,7 @@ const trustCards = [
   },
   {
     title: "Careful Repair Process",
-    desc: "Every repair is done with attention to detail, following proper procedures to protect your device.",
+    desc: "Each repair gets my full attention. I follow proper steps and test everything before returning it.",
     icon: {
       viewBox: "0 0 24 24",
       paths: [
@@ -68,7 +68,7 @@ const trustCards = [
   },
   {
     title: "Clear Communication",
-    desc: "I keep you informed throughout the process—no tech jargon, just plain explanations.",
+    desc: "I keep you updated during the repair in plain language so you always know exactly what's happening.",
     icon: {
       viewBox: "0 0 24 24",
       paths: ["M7.9 20A9 9 0 1 0 4 16.1L2 22Z"],

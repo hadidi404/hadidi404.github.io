@@ -1,6 +1,6 @@
 <template>
   <section id="services" class="w-full">
-    <div class="max-w-7xl mx-auto flex flex-col items-center justify-center py-12 sm:py-20 space-y-4 px-8">
+    <div class="max-w-7xl mx-auto flex flex-col items-center justify-center py-12 sm:py-20 space-y-4 px-4 sm:px-8">
       <div v-animate>
         <SectionTitle
           badge="WHAT I OFFER"

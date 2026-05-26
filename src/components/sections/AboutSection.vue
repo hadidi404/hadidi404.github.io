@@ -1,6 +1,6 @@
 <template>
   <section id="about">
-   <div class="mx-auto max-w-7xl px-8 py-12 sm:py-20">
+   <div class="mx-auto max-w-7xl px-4 sm:px-8 py-12 sm:py-20">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-6 items-start">
 
       <div v-animate class="flex flex-col space-y-2 order-1 lg:col-start-1 lg:row-start-1">

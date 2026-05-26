@@ -10,20 +10,32 @@ const links = [
   { label: 'Contact', id: 'contact' }
 ]
 
+const routeLinks = [
+  { label: 'Gallery', path: '/repairs' }
+]
+
 const menuOpen = ref(false)
 const activeSection = ref('home')
+const navVisible = ref(true)
 const route = useRoute()
 const router = useRouter()
 
 let scrollHandler = null
+let lastScrollY = 0
 
 onMounted(() => {
   scrollHandler = () => {
-    const scrollY = window.scrollY + 80
+    const scrollY = window.scrollY
+
+    navVisible.value = scrollY < lastScrollY || scrollY < 80
+    if (menuOpen.value && !navVisible.value) menuOpen.value = false
+    lastScrollY = scrollY
+
+    const offsetY = scrollY + 80
     let current = links[0].id
     for (const { id } of links) {
       const el = document.getElementById(id)
-      if (el && el.offsetTop <= scrollY) current = id
+      if (el && el.offsetTop <= offsetY) current = id
     }
     activeSection.value = current
   }
@@ -44,10 +56,18 @@ async function scrollTo(id) {
   const el = document.getElementById(id)
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
+
+function navigateTo(path) {
+  menuOpen.value = false
+  router.push(path)
+}
 </script>
 
 <template>
-  <nav class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-gray-200/60 shadow-sm">
+  <nav
+    class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-gray-200/60 shadow-sm transition-transform duration-300"
+    :class="navVisible ? 'translate-y-0' : '-translate-y-full'"
+  >
     <div class="max-w-7xl mx-auto h-16 flex items-center justify-between px-4 sm:px-8">
 
       <div class="font-bold text-xl text-blue-600">
@@ -62,6 +82,19 @@ async function scrollTo(id) {
           :class="[
             'text-base font-medium transition-colors duration-200 focus:outline-none',
             route.path === '/' && activeSection === l.id
+              ? 'text-blue-600 font-semibold'
+              : 'text-gray-600 hover:text-blue-600'
+          ]"
+        >
+          {{ l.label }}
+        </button>
+        <button
+          v-for="l in routeLinks"
+          :key="l.path"
+          @click="router.push(l.path)"
+          :class="[
+            'text-base font-medium transition-colors duration-200 focus:outline-none',
+            route.path === l.path
               ? 'text-blue-600 font-semibold'
               : 'text-gray-600 hover:text-blue-600'
           ]"
@@ -90,8 +123,21 @@ async function scrollTo(id) {
         :key="l.id"
         @click="scrollTo(l.id)"
         :class="[
-          'text-left py-3 text-base font-medium border-b border-gray-100 last:border-0 focus:outline-none transition-colors duration-200',
+          'text-left py-3 text-base font-medium border-b border-gray-100 focus:outline-none transition-colors duration-200',
           route.path === '/' && activeSection === l.id
+            ? 'text-blue-600 font-semibold'
+            : 'text-gray-600 hover:text-blue-600'
+        ]"
+      >
+        {{ l.label }}
+      </button>
+      <button
+        v-for="l in routeLinks"
+        :key="l.path"
+        @click="navigateTo(l.path)"
+        :class="[
+          'text-left py-3 text-base font-medium border-b border-gray-100 last:border-0 focus:outline-none transition-colors duration-200',
+          route.path === l.path
             ? 'text-blue-600 font-semibold'
             : 'text-gray-600 hover:text-blue-600'
         ]"

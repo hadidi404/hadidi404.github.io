@@ -1,6 +1,6 @@
 <template>
   <section id="contact" class="flex flex-col items-center justify-center">
-    <div class="mx-auto w-full max-w-5xl px-8 space-y-6 py-12 sm:py-20">
+    <div class="mx-auto w-full max-w-5xl px-4 sm:px-8 space-y-6 py-12 sm:py-20">
 
       <div v-animate class="flex flex-col space-y-4 justify-center items-center">
         <SectionTitle
@@ -25,7 +25,7 @@
         <p>I'll get back to you as soon as possible with an honest diagnosis</p>
         <div class="w-full flex flex-col gap-7">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
-            <a href="tel:+639123456789"
+            <a href="tel:+639489851500" target="_blank" rel="noopener noreferrer"
               class="group flex items-start gap-4 p-6 bg-white rounded-2xl border-2 border-gray-200 hover:border-blue-500 transition-[box-shadow,border-color] duration-700 ease-in-out hover:shadow-lg">
               <div
                 class="w-12 h-12 bg-[#DBEAFE] rounded-xl flex items-center justify-center shrink-0 group-hover:bg-blue-600 transition-colors">
@@ -40,11 +40,11 @@
               </div>
               <div class="flex flex-col items-start">
                 <div class="text-sm font-semibold text-gray-600 mb-1">Call or Text</div>
-                <div class="text-lg font-bold text-gray-900">0976 5374 642</div>
+                <div class="text-lg font-bold text-gray-900">0948 985 1500</div>
                 <div class="text-sm text-gray-500 mt-1">Available 9AM - 6PM</div>
               </div>
             </a>
-            <a href="https://m.me/raysontechservices" target="_blank" rel="noopener noreferrer"
+            <a href="https://www.messenger.com/t/941767919020399" target="_blank" rel="noopener noreferrer"
               class="group flex items-start gap-4 p-6 bg-white rounded-2xl border-2 border-gray-200 hover:border-blue-500 transition-[box-shadow,border-color] duration-700 ease-in-out hover:shadow-lg">
               <div
                 class="w-12 h-12 bg-[#DBEAFE] rounded-xl flex items-center justify-center shrink-0 group-hover:bg-blue-600 transition-colors">

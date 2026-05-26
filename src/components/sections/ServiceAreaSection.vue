@@ -9,7 +9,7 @@
             pointer-events-none">
     </div>
 
-    <div class="m-auto max-w-5xl px-8 py-12 sm:py-20 relative z-10">
+    <div class="m-auto max-w-5xl px-4 sm:px-8 py-12 sm:py-20 relative z-10">
       <div class="flex flex-col space-y-4 justify-center items-center">
         <SectionTitle
           badge="WHERE WE SERVE"
