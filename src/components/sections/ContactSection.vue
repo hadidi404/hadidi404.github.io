@@ -26,7 +26,7 @@
         <div class="w-full flex flex-col gap-3 sm:gap-7">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 w-full">
             <a href="tel:+639489851500" target="_blank" rel="noopener noreferrer"
-              class="group flex items-start gap-4 p-4 sm:p-6 bg-white rounded-2xl border-2 border-gray-200 hover:border-blue-500 transition-[box-shadow,border-color] duration-700 ease-in-out hover:shadow-lg">
+              class="group flex items-center gap-4 p-4 sm:p-6 bg-white rounded-2xl border-2 border-gray-200 hover:border-blue-500 transition-[box-shadow,border-color] duration-700 ease-in-out hover:shadow-lg">
               <div
                 class="w-10 h-10 sm:w-12 sm:h-12 bg-[#DBEAFE] rounded-xl flex items-center justify-center shrink-0 group-hover:bg-blue-600 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -45,7 +45,7 @@
               </div>
             </a>
             <a href="https://www.messenger.com/t/941767919020399" target="_blank" rel="noopener noreferrer"
-              class="group flex items-start gap-4 p-4 sm:p-6 bg-white rounded-2xl border-2 border-gray-200 hover:border-blue-500 transition-[box-shadow,border-color] duration-700 ease-in-out hover:shadow-lg">
+              class="group flex items-center gap-4 p-4 sm:p-6 bg-white rounded-2xl border-2 border-gray-200 hover:border-blue-500 transition-[box-shadow,border-color] duration-700 ease-in-out hover:shadow-lg">
               <div
                 class="w-10 h-10 sm:w-12 sm:h-12 bg-[#DBEAFE] rounded-xl flex items-center justify-center shrink-0 group-hover:bg-blue-600 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -63,27 +63,6 @@
                 <div class="text-sm text-gray-500 mt-1">Usually replies in minutes</div>
               </div>
             </a>
-          </div>
-          <div class="w-full outline outline-black/20 rounded-2xl bg-linear-to-br from-[#EFF6FF] to-[#ECFEFF]">
-            <div class="flex items-start gap-3 p-4 sm:p-6 text-left">
-              <div class="mt-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-map-pin w-6 h-6 text-blue-600" aria-hidden="true">
-                  <path
-                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0">
-                  </path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-              <div>
-                <div class="text-sm sm:text-base font-medium">Service Locations</div>
-                <ul class="mt-1 list-disc pl-5 text-sm sm:text-base">
-                  <li>Baguio City, Benguet</li>
-                  <li>Infanta, Pangasinan</li>
-                </ul>
-              </div>
-            </div>
           </div>
           <div class="w-full text-center bg-[#FEFCE8] rounded-xl p-4 border border-[#FFF085]">
             <p class="text-sm text-gray-700"><span class="font-semibold text-gray-900">💡 Tip:</span> Include your device
