@@ -1,8 +1,6 @@
 <template>
   <div class="w-full grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
-    <div v-for="(group, gIndex) in serviceGroups" :key="gIndex" v-animate="gIndex * 120" class="bg-white rounded-2xl p-8 shadow-sm transition-[box-shadow,border-color,transform] duration-700 ease-in-out
-                hover:shadow-2xl border-gray-100 border-2
-                hover:border-transparent hover:-translate-y-1 space-y-5">
+    <div v-for="(group, gIndex) in serviceGroups" :key="gIndex" v-animate="gIndex * 120" class="bg-white rounded-2xl p-8 shadow-sm border-2 border-gray-100 transition-all duration-700 ease-in-out hover:-translate-y-1 hover:shadow-xl space-y-5">
       <div class="flex items-center justify-center rounded-2xl w-20 h-20 bg-blue-50">
         <svg
           xmlns="http://www.w3.org/2000/svg"

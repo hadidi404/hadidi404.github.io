@@ -7,7 +7,7 @@
     <div class="absolute bottom-0 -left-32 w-125 h-125 rounded-full bg-indigo-600/25 blur-[100px] pointer-events-none"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-175 h-75 rounded-full bg-cyan-700/20 blur-[80px] pointer-events-none"></div>
 
-    <div class="relative z-10 max-w-5xl mx-auto px-8 w-full text-center">
+    <div class="relative z-10 max-w-6xl mx-auto px-8 w-full text-center">
       <div class="flex flex-col items-center space-y-6">
 
         <div v-animate class="w-fit flex items-center gap-2 border border-blue-500/30 py-2.5 px-5 rounded-full text-sm bg-blue-900/40">
@@ -19,9 +19,9 @@
           <p class="text-[14px] font-medium text-blue-300">Trusted by hundreds of satisfied customers</p>
         </div>
 
-        <h1 v-animate="100" class="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-white">
-          Phone, Laptop &amp; Tech Repair<br class="hidden sm:block" />
-          <span class="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-400">
+        <h1 v-animate="100" class="font-bold text-[40px] sm:text-4xl md:text-6xl lg:text-6xl leading-tight text-white">
+          Phone, Laptop &amp; Electronics Repair
+          <span class="block text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-400 whitespace-nowrap">
             — Done Right
           </span>
         </h1>
