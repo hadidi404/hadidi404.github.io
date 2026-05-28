@@ -23,15 +23,15 @@
               class="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 group-hover:opacity-0"
               src="/about.jpg"
               alt="Rayson — tech repair professional"
-              loading="lazy"
-              decoding="async"
+              loading="eager"
+              decoding="auto"
             />
             <img
               class="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 opacity-0 group-hover:opacity-100"
               src="/sunglass.png"
               alt="Rayson with sunglasses"
-              loading="lazy"
-              decoding="async"
+              loading="eager"
+              decoding="auto"
             />
           </a>
 

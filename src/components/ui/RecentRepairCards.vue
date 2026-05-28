@@ -11,8 +11,8 @@
             :src="item.pic"
             :alt="item.desc"
             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
-            loading="lazy"
-            decoding="async"
+            loading="eager"
+            decoding="auto"
           />
           <div class="absolute top-3 left-3">
             <span class="bg-blue-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg">
