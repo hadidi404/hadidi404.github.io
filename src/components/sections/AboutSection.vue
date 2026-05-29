@@ -21,14 +21,14 @@
           <a @click.prevent="scrollToContact" href="#" class="block relative w-55 h-55 sm:w-72 sm:h-72 lg:w-88 lg:h-88 rounded-full overflow-hidden shadow-2xl border-4 border-white cursor-pointer group">
             <img
               class="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 group-hover:opacity-0"
-              src="/about.jpg"
+              src="/images/about.jpg"
               alt="Rayson — tech repair professional"
               loading="eager"
               decoding="auto"
             />
             <img
               class="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 opacity-0 group-hover:opacity-100"
-              src="/sunglass.png"
+              src="/images/sunglass.png"
               alt="Rayson with sunglasses"
               loading="eager"
               decoding="auto"

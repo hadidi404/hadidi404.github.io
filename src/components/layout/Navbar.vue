@@ -27,7 +27,8 @@ onMounted(() => {
   scrollHandler = () => {
     const scrollY = window.scrollY
 
-    navVisible.value = scrollY < lastScrollY || scrollY < 80
+    const isMobile = window.innerWidth < 768
+    navVisible.value = !isMobile || scrollY < lastScrollY || scrollY < 80
     if (menuOpen.value && !navVisible.value) menuOpen.value = false
     lastScrollY = scrollY
 

@@ -6,6 +6,7 @@ export default createRouter({
   scrollBehavior: () => ({ top: 0 }),
   routes: [
     { path: '/', component: HomePage },
-    { path: '/repairs', component: () => import('../pages/GalleryPage.vue') }
+    { path: '/repairs', component: () => import('../pages/GalleryPage.vue') },
+    { path: '/admin', component: () => import('../pages/AdminPage.vue') }
   ]
 })

@@ -28,6 +28,7 @@
         <div class="flex gap-8 sm:gap-10 pt-6 lg:pt-0 border-t lg:border-t-0 border-white/10">
           <div>
             <div class="text-3xl sm:text-4xl font-bold text-white">{{ repairs.length }}<span class="text-blue-400">+</span></div>
+
             <div class="text-xs sm:text-sm text-slate-400 mt-1 uppercase tracking-wide">Repairs Shown</div>
           </div>
           <div>
@@ -57,7 +58,24 @@
         </button>
       </div>
 
-      <div v-if="filteredRepairs.length" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div v-if="loading" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div v-for="n in 6" :key="n" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+          <div class="aspect-4/3 bg-gray-200 animate-pulse"></div>
+          <div class="p-5 space-y-2">
+            <div class="h-5 bg-gray-200 rounded animate-pulse w-3/4"></div>
+            <div class="h-4 bg-gray-200 rounded animate-pulse w-1/2"></div>
+            <div class="h-3 bg-gray-200 rounded animate-pulse w-full mt-2"></div>
+            <div class="h-3 bg-gray-200 rounded animate-pulse w-4/5"></div>
+          </div>
+        </div>
+      </div>
+
+      <div v-else-if="error" class="flex flex-col items-center justify-center py-24 text-center">
+        <p class="text-red-500 font-medium">{{ error }}</p>
+        <button @click="fetchRepairs" class="mt-3 text-sm text-blue-600 hover:underline focus:outline-none">Try again</button>
+      </div>
+
+      <div v-else-if="filteredRepairs.length" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <div
           v-for="(item, index) in filteredRepairs"
           :key="item.id"
@@ -67,18 +85,19 @@
         >
           <div class="relative aspect-4/3 overflow-hidden bg-gray-100">
             <img
-              :src="item.before"
+              v-if="item.images[0].before"
+              :src="item.images[0].before"
               :alt="`${item.title} — before`"
               class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-              :class="showAfter[item.id] ? 'opacity-0' : 'opacity-100'"
+              :class="showAfter[item._id] ? 'opacity-0' : 'opacity-100'"
               loading="lazy"
               decoding="async"
             />
             <img
-              :src="item.after"
+              :src="item.images[0].after"
               :alt="`${item.title} — after`"
               class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-              :class="showAfter[item.id] ? 'opacity-100' : 'opacity-0'"
+              :class="(!item.images[0].before || showAfter[item._id]) ? 'opacity-100' : 'opacity-0'"
               loading="lazy"
               decoding="async"
             />
@@ -94,30 +113,36 @@
             <div class="absolute top-3 left-3 pointer-events-none">
               <span
                 class="text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider transition-colors duration-300"
-                :class="showAfter[item.id] ? 'bg-green-500' : 'bg-orange-500'"
+                :class="!item.images[0].before ? 'bg-blue-500' : showAfter[item._id] ? 'bg-green-500' : 'bg-orange-500'"
               >
-                {{ showAfter[item.id] ? 'After' : 'Before' }}
+                {{ !item.images[0].before ? 'Fixed' : showAfter[item._id] ? 'After' : 'Before' }}
               </span>
             </div>
 
-            <div class="absolute top-3 right-3 pointer-events-none">
+            <div class="absolute top-3 right-3 pointer-events-none flex flex-col items-end gap-1.5">
               <span class="bg-black/40 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full">
                 {{ item.category }}
               </span>
+              <span
+                v-if="item.images.length > 1"
+                class="bg-black/40 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full"
+              >
+                {{ item.images.length }} fixes
+              </span>
             </div>
 
-            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1 bg-black/50 backdrop-blur-sm rounded-full p-1">
+            <div v-if="item.images[0].before" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1 bg-black/50 backdrop-blur-sm rounded-full p-1">
               <button
-                @click.stop="showAfter[item.id] = false"
+                @click.stop="showAfter[item._id] = false"
                 class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 focus:outline-none"
-                :class="!showAfter[item.id] ? 'bg-white text-gray-900' : 'text-white/70 hover:text-white'"
+                :class="!showAfter[item._id] ? 'bg-white text-gray-900' : 'text-white/70 hover:text-white'"
               >
                 Before
               </button>
               <button
-                @click.stop="showAfter[item.id] = true"
+                @click.stop="showAfter[item._id] = true"
                 class="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 focus:outline-none"
-                :class="showAfter[item.id] ? 'bg-white text-gray-900' : 'text-white/70 hover:text-white'"
+                :class="showAfter[item._id] ? 'bg-white text-gray-900' : 'text-white/70 hover:text-white'"
               >
                 After
               </button>
@@ -132,7 +157,7 @@
         </div>
       </div>
 
-      <div v-else class="flex flex-col items-center justify-center py-24 text-center">
+      <div v-else-if="!loading" class="flex flex-col items-center justify-center py-24 text-center">
         <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-4">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909" />
@@ -189,32 +214,79 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 p-1">
-            <div class="relative">
-              <div class="aspect-4/3 overflow-hidden rounded-xl bg-gray-100">
-                <img
-                  :src="selectedItem.before"
-                  :alt="`${selectedItem.title} — before`"
-                  class="w-full h-full object-cover"
-                />
+          <template v-if="selectedItem.images.length === 1">
+            <div class="grid gap-2 px-6 py-4" :class="selectedItem.images[0].before ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'">
+              <div v-if="selectedItem.images[0].before" class="relative group">
+                <div class="aspect-4/3 overflow-hidden rounded-xl bg-gray-100">
+                  <img
+                    :src="selectedItem.images[0].before"
+                    :alt="`${selectedItem.title} — before`"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="absolute top-3 left-3">
+                  <span class="bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow">Before</span>
+                </div>
+                <button @click.stop="openLightbox(selectedItem.images[0].before, `${selectedItem.title} — before`)" class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/50 backdrop-blur-sm p-2 rounded-xl text-white focus:outline-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0 5-5m11 5-5-5m5 5v-4m0 4h-4" /></svg>
+                </button>
               </div>
-              <div class="absolute top-3 left-3">
-                <span class="bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow">Before</span>
+              <div class="relative group" :class="!selectedItem.images[0].before ? 'max-w-lg mx-auto w-full' : ''">
+                <div class="aspect-4/3 overflow-hidden rounded-xl bg-gray-100">
+                  <img
+                    :src="selectedItem.images[0].after"
+                    :alt="`${selectedItem.title} — after`"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="absolute top-3 left-3">
+                  <span
+                    class="text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow"
+                    :class="selectedItem.images[0].before ? 'bg-green-500' : 'bg-blue-500'"
+                  >
+                    {{ selectedItem.images[0].before ? 'After' : 'Fixed' }}
+                  </span>
+                </div>
+                <button @click.stop="openLightbox(selectedItem.images[0].after, `${selectedItem.title} — after`)" class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/50 backdrop-blur-sm p-2 rounded-xl text-white focus:outline-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0 5-5m11 5-5-5m5 5v-4m0 4h-4" /></svg>
+                </button>
               </div>
             </div>
-            <div class="relative">
-              <div class="aspect-4/3 overflow-hidden rounded-xl bg-gray-100">
-                <img
-                  :src="selectedItem.after"
-                  :alt="`${selectedItem.title} — after`"
-                  class="w-full h-full object-cover"
-                />
-              </div>
-              <div class="absolute top-3 left-3">
-                <span class="bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow">After</span>
+          </template>
+
+          <template v-else>
+            <div class="px-6 py-4 space-y-4">
+              <div v-for="(img, i) in selectedItem.images" :key="img.label ?? i">
+                <div v-if="img.label" class="pt-1 pb-2 text-xs font-bold text-gray-400 uppercase tracking-widest">{{ img.label }}</div>
+                <div class="grid gap-2" :class="img.before ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'">
+                  <div v-if="img.before" class="relative group">
+                    <div class="aspect-4/3 overflow-hidden rounded-xl bg-gray-100">
+                      <img :src="img.before" :alt="`${selectedItem.title} — ${img.label ?? ''} before`" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="absolute top-3 left-3">
+                      <span class="bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow">Before</span>
+                    </div>
+                    <button @click.stop="openLightbox(img.before, `${selectedItem.title} — ${img.label ?? ''} before`)" class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/50 backdrop-blur-sm p-2 rounded-xl text-white focus:outline-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0 5-5m11 5-5-5m5 5v-4m0 4h-4" /></svg>
+                    </button>
+                  </div>
+                  <div class="relative group" :class="!img.before ? 'max-w-lg mx-auto w-full' : ''">
+                    <div class="aspect-4/3 overflow-hidden rounded-xl bg-gray-100">
+                      <img :src="img.after" :alt="`${selectedItem.title} — ${img.label ?? ''} after`" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="absolute top-3 left-3">
+                      <span class="text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow" :class="img.before ? 'bg-green-500' : 'bg-blue-500'">
+                        {{ img.before ? 'After' : 'Fixed' }}
+                      </span>
+                    </div>
+                    <button @click.stop="openLightbox(img.after, `${selectedItem.title} — ${img.label ?? ''} after`)" class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/50 backdrop-blur-sm p-2 rounded-xl text-white focus:outline-none">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0 5-5m11 5-5-5m5 5v-4m0 4h-4" /></svg>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          </template>
 
           <div class="px-6 py-5">
             <p class="text-gray-600 leading-relaxed">{{ selectedItem.desc }}</p>
@@ -248,6 +320,23 @@
       </div>
     </Transition>
   </Teleport>
+
+  <Teleport to="body">
+    <Transition name="modal">
+      <div
+        v-if="lightboxSrc"
+        class="fixed inset-0 z-300 bg-black flex items-center justify-center"
+        @click="closeLightbox"
+      >
+        <img :src="lightboxSrc" :alt="lightboxAlt" class="max-w-full max-h-full object-contain select-none" @click.stop />
+        <button @click="closeLightbox" class="absolute top-4 right-4 p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-colors focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </Transition>
+  </Teleport>
 </template>
 
 <script setup>
@@ -256,72 +345,41 @@ import { RouterLink } from 'vue-router'
 
 const activeCategory = ref('All')
 const selectedIndex = ref(-1)
+const loading = ref(true)
+const error = ref(null)
+const lightboxSrc = ref(null)
+const lightboxAlt = ref('')
 
 const categories = ['All', 'Phone', 'Laptop', 'Tablet', 'Desktop']
 
-const repairs = [
-  {
-    id: 1,
-    title: 'Cracked Screen Replacement',
-    device: 'iPhone 13',
-    category: 'Phone',
-    desc: 'Deep cracks across the entire display — replaced with an OEM-quality screen, restored like new.',
-    before: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080',
-    after: 'https://images.unsplash.com/photo-1731391747600-4d0f478b2184?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080',
-  },
-  {
-    id: 2,
-    title: 'Battery Replacement',
-    device: 'Samsung Galaxy S22',
-    category: 'Phone',
-    desc: 'Swollen battery causing back panel to bulge — safely removed and replaced with a new cell.',
-    before: 'https://images.unsplash.com/photo-1546054454-aa26e2b734c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080',
-    after: 'https://images.unsplash.com/photo-1735875530804-d661ca2001da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080',
-  },
-  {
-    id: 3,
-    title: 'SSD Upgrade',
-    device: 'MacBook Pro 2019',
-    category: 'Laptop',
-    desc: 'Slow spinning HDD swapped for a 1TB NVMe SSD — boot time dropped from 90s to under 10s.',
-    before: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080',
-    after: 'https://images.unsplash.com/photo-1709102884400-b50ca1a12bc3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080',
-  },
-  {
-    id: 4,
-    title: 'Charging Port Repair',
-    device: 'iPad Air 5th Gen',
-    category: 'Tablet',
-    desc: 'USB-C port was loose and intermittent — cleaned and replaced, charges reliably again.',
-    before: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080',
-    after: 'https://images.unsplash.com/photo-1735964366700-9eedefcf0065?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080',
-  },
-  {
-    id: 5,
-    title: 'Motherboard Repair',
-    device: 'Dell XPS 15',
-    category: 'Laptop',
-    desc: 'No power after liquid spill — traced fault to corroded power rail, reflowed and cleaned.',
-    before: 'https://images.unsplash.com/photo-1518770660439-4636190af475?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080',
-    after: 'https://images.unsplash.com/photo-1560165143-fa7e2d9e594c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080',
-  },
-  {
-    id: 6,
-    title: 'Deep Clean & Maintenance',
-    device: 'Custom Gaming PC',
-    category: 'Desktop',
-    desc: 'Years of dust buildup causing overheating — fully disassembled, cleaned, and repasted.',
-    before: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080',
-    after: 'https://images.unsplash.com/photo-1768633647910-7e6fb53e5b0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080',
-  },
-]
+const repairs = ref([])
+const showAfter = reactive({})
 
-const showAfter = reactive(Object.fromEntries(repairs.map(r => [r.id, false])))
+const CACHE_KEY = 'repairs_cache'
+
+function applyData(data) {
+  repairs.value = data
+  data.forEach(r => { showAfter[r._id] = false })
+}
+
+async function fetchRepairs() {
+  if (!repairs.value.length) loading.value = true
+  error.value = null
+  try {
+    const res = await fetch('/api/repairs')
+    if (!res.ok) throw new Error('Failed to fetch repairs')
+    applyData(await res.json())
+  } catch (err) {
+    if (!repairs.value.length) error.value = err.message
+  } finally {
+    loading.value = false
+  }
+}
 
 const filteredRepairs = computed(() =>
   activeCategory.value === 'All'
-    ? repairs
-    : repairs.filter(r => r.category === activeCategory.value)
+    ? repairs.value
+    : repairs.value.filter(r => r.category === activeCategory.value)
 )
 
 const selectedItem = computed(() => filteredRepairs.value[selectedIndex.value] ?? null)
@@ -344,14 +402,38 @@ function nextItem() {
   if (selectedIndex.value < filteredRepairs.value.length - 1) selectedIndex.value++
 }
 
+function openLightbox(src, alt) {
+  lightboxSrc.value = src
+  lightboxAlt.value = alt
+}
+
+function closeLightbox() {
+  lightboxSrc.value = null
+  lightboxAlt.value = ''
+}
+
 function onKeydown(e) {
-  if (selectedIndex.value === -1) return
-  if (e.key === 'Escape') closeModal()
+  if (e.key === 'Escape') {
+    if (lightboxSrc.value) { closeLightbox(); return }
+    if (selectedIndex.value !== -1) closeModal()
+  }
+  if (lightboxSrc.value) return
   if (e.key === 'ArrowLeft') prevItem()
   if (e.key === 'ArrowRight') nextItem()
 }
 
-onMounted(() => window.addEventListener('keydown', onKeydown))
+onMounted(() => {
+  try {
+    const cached = localStorage.getItem(CACHE_KEY)
+    if (cached) {
+      applyData(JSON.parse(cached))
+      loading.value = false
+    }
+  } catch { /* corrupted cache — fall through to fetch */ }
+
+  fetchRepairs()
+  window.addEventListener('keydown', onKeydown)
+})
 onUnmounted(() => {
   window.removeEventListener('keydown', onKeydown)
   document.body.style.overflow = ''
