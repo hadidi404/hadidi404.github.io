@@ -25,30 +25,11 @@
       <div class="flex items-center gap-3">
         <RouterLink to="/repairs" class="text-sm text-blue-600 hover:underline">Gallery</RouterLink>
         <span class="text-gray-300">/</span>
+        <RouterLink to="/admin/manage" class="text-sm text-blue-600 hover:underline">Manage</RouterLink>
+        <span class="text-gray-300">/</span>
         <span class="text-sm font-semibold text-gray-800">{{ editId ? 'Edit Repair' : 'New Repair' }}</span>
       </div>
-    </div>
-
-    <div class="max-w-6xl mx-auto px-4 pt-6">
-      <div class="flex items-center justify-between mb-3">
-        <p class="text-xs font-bold text-gray-500 uppercase tracking-widest">Existing Repairs</p>
-        <button v-if="editId" @click="resetForm" class="text-xs text-blue-600 hover:underline focus:outline-none">+ New Repair</button>
-      </div>
-      <div v-if="loadingRepairs" class="text-xs text-gray-400 py-2">Loading...</div>
-      <div v-else-if="existingRepairs.length === 0" class="text-xs text-gray-400 py-2">No repairs yet.</div>
-      <div v-else class="flex gap-3 overflow-x-auto pb-2 scrollbar-none">
-        <button
-          v-for="r in existingRepairs"
-          :key="r._id"
-          @click="loadForEdit(r)"
-          class="shrink-0 bg-white border rounded-xl px-4 py-3 text-left transition-all focus:outline-none hover:shadow-md w-44"
-          :class="editId === r._id ? 'border-blue-400 shadow-md ring-1 ring-blue-300' : 'border-gray-200'"
-        >
-          <p class="text-xs font-bold text-gray-800 truncate">{{ r.title }}</p>
-          <p class="text-xs text-blue-500 truncate mt-0.5">{{ r.device }}</p>
-          <p class="text-xs text-gray-400 mt-1">{{ r.images?.length ?? 0 }} pair{{ r.images?.length !== 1 ? 's' : '' }}</p>
-        </button>
-      </div>
+      <button @click="logout" class="text-xs text-gray-400 hover:text-gray-700 transition-colors focus:outline-none">Log out</button>
     </div>
 
     <div class="max-w-6xl mx-auto px-4 py-6 grid lg:grid-cols-[1fr_340px] gap-8 items-start">
@@ -125,11 +106,7 @@
                 >
                   Skipped
                 </div>
-                <label
-                  v-else
-                  :for="`before-${i}`"
-                  class="block cursor-pointer"
-                >
+                <label v-else :for="`before-${i}`" class="block cursor-pointer">
                   <div
                     class="aspect-4/3 rounded-xl overflow-hidden border-2 transition-colors"
                     :class="pair.before ? 'border-orange-200' : 'border-dashed border-gray-200 bg-gray-50 hover:border-blue-300'"
@@ -234,7 +211,7 @@
               No image yet
             </div>
 
-              <div class="absolute top-3 left-3">
+            <div class="absolute top-3 left-3">
               <span
                 class="text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider"
                 :class="!previewFirstPair.before ? 'bg-blue-500' : previewShowAfter ? 'bg-green-500' : 'bg-orange-500'"
@@ -315,15 +292,16 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, nextTick } from 'vue'
+import { ref, reactive, computed, nextTick, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import Cropper from 'cropperjs'
 import 'cropperjs/dist/cropper.css'
 
-const authed = ref(false)
+const savedSecret = sessionStorage.getItem('admin_secret')
+const authed = ref(!!savedSecret)
 const passwordInput = ref('')
 const passwordError = ref(false)
-const secret = ref('')
+const secret = ref(savedSecret || '')
 
 async function checkPassword() {
   try {
@@ -337,13 +315,21 @@ async function checkPassword() {
       passwordInput.value = ''
     } else {
       secret.value = passwordInput.value
+      sessionStorage.setItem('admin_secret', passwordInput.value)
       authed.value = true
       passwordError.value = false
-      fetchExisting()
+      passwordInput.value = ''
     }
   } catch {
     passwordError.value = true
   }
+}
+
+function logout() {
+  sessionStorage.removeItem('admin_secret')
+  sessionStorage.removeItem('edit_repair')
+  authed.value = false
+  secret.value = ''
 }
 
 const categories = ['Phone', 'Laptop', 'Tablet', 'Desktop']
@@ -433,19 +419,14 @@ function closeCropModal() {
   }
 }
 
-const existingRepairs = ref([])
-const loadingRepairs = ref(false)
 const editId = ref(null)
+const submitting = ref(false)
+const submitError = ref(null)
+const submitSuccess = ref(false)
 
-async function fetchExisting() {
-  loadingRepairs.value = true
-  try {
-    const res = await fetch('/api/repairs')
-    existingRepairs.value = await res.json()
-  } finally {
-    loadingRepairs.value = false
-  }
-}
+const canSubmit = computed(() => {
+  return form.title.trim() && form.device.trim() && form.images.some(p => p.after)
+})
 
 function loadForEdit(repair) {
   editId.value = repair._id
@@ -480,14 +461,6 @@ function resetForm() {
   })
 }
 
-const canSubmit = computed(() => {
-  return form.title.trim() && form.device.trim() && form.images.some(p => p.after)
-})
-
-const submitting = ref(false)
-const submitError = ref(null)
-const submitSuccess = ref(false)
-
 function buildPayload() {
   return {
     title: form.title.trim(),
@@ -520,7 +493,6 @@ async function submit() {
       throw new Error(body.error || 'Failed to save')
     }
     submitSuccess.value = true
-    await fetchExisting()
     if (!isEdit) resetForm()
   } catch (err) {
     submitError.value = err.message
@@ -541,7 +513,6 @@ async function deleteRepair() {
       body: JSON.stringify({ _id: editId.value }),
     })
     if (!res.ok) throw new Error('Failed to delete')
-    await fetchExisting()
     resetForm()
   } catch (err) {
     submitError.value = err.message
@@ -549,4 +520,12 @@ async function deleteRepair() {
     submitting.value = false
   }
 }
+
+onMounted(() => {
+  const toEdit = sessionStorage.getItem('edit_repair')
+  if (toEdit) {
+    sessionStorage.removeItem('edit_repair')
+    try { loadForEdit(JSON.parse(toEdit)) } catch { /* */ }
+  }
+})
 </script>

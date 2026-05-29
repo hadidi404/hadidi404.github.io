@@ -16,7 +16,7 @@ module.exports = async function handler(req, res) {
     const collection = db.collection('repairs')
 
     if (req.method === 'GET') {
-      const repairs = await collection.find({}).sort({ createdAt: -1 }).toArray()
+      const repairs = await collection.find({}).sort({ sortOrder: 1, createdAt: -1 }).toArray()
       return res.status(200).json(repairs)
     }
 
@@ -24,12 +24,30 @@ module.exports = async function handler(req, res) {
       if (!authCheck(req, res)) return
       const { _authCheck, title, device, category, desc, images } = req.body
       if (_authCheck) return res.status(200).json({ ok: true })
-      const result = await collection.insertOne({ title, device, category, desc, images, createdAt: new Date() })
+      const sortOrder = await collection.countDocuments()
+      const result = await collection.insertOne({ title, device, category, desc, images, sortOrder, createdAt: new Date() })
       return res.status(201).json({ insertedId: result.insertedId })
     }
 
     if (req.method === 'PATCH') {
       if (!authCheck(req, res)) return
+
+      if (req.body._reorder) {
+        const { updates } = req.body
+        if (!Array.isArray(updates)) return res.status(400).json({ error: 'updates must be an array' })
+        await Promise.all(
+          updates
+            .filter(({ _id }) => ObjectId.isValid(_id))
+            .map(({ _id, sortOrder }) =>
+              collection.updateOne(
+                { _id: new ObjectId(String(_id)) },
+                { $set: { sortOrder: Number(sortOrder) } }
+              )
+            )
+        )
+        return res.status(200).json({ ok: true })
+      }
+
       const { _id, title, device, category, desc, images } = req.body
       if (!_id) return res.status(400).json({ error: 'Missing _id' })
       if (!ObjectId.isValid(_id)) return res.status(400).json({ error: 'Invalid _id' })

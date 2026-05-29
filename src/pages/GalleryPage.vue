@@ -75,7 +75,7 @@
         <button @click="fetchRepairs" class="mt-3 text-sm text-blue-600 hover:underline focus:outline-none">Try again</button>
       </div>
 
-      <div v-else-if="filteredRepairs.length" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div v-else-if="filteredRepairs.length || fetching" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <div
           v-for="(item, index) in filteredRepairs"
           :key="item.id"
@@ -155,9 +155,21 @@
             <p class="text-sm text-gray-500 leading-relaxed pt-1">{{ item.desc }}</p>
           </div>
         </div>
+
+        <template v-if="fetching">
+          <div v-for="n in 3" :key="`skel-${n}`" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+            <div class="aspect-4/3 bg-gray-200 animate-pulse"></div>
+            <div class="p-5 space-y-2">
+              <div class="h-5 bg-gray-200 rounded animate-pulse w-3/4"></div>
+              <div class="h-4 bg-gray-200 rounded animate-pulse w-1/2"></div>
+              <div class="h-3 bg-gray-200 rounded animate-pulse w-full mt-2"></div>
+              <div class="h-3 bg-gray-200 rounded animate-pulse w-4/5"></div>
+            </div>
+          </div>
+        </template>
       </div>
 
-      <div v-else-if="!loading" class="flex flex-col items-center justify-center py-24 text-center">
+      <div v-else-if="!loading && !fetching" class="flex flex-col items-center justify-center py-24 text-center">
         <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-4">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909" />
@@ -362,8 +374,14 @@ function applyData(data) {
   data.forEach(r => { showAfter[r._id] = false })
 }
 
+const fetching = ref(false)
+
 async function fetchRepairs() {
-  if (!repairs.value.length) loading.value = true
+  if (!repairs.value.length) {
+    loading.value = true
+  } else {
+    fetching.value = true
+  }
   error.value = null
   try {
     const res = await fetch('/api/repairs')
@@ -373,6 +391,7 @@ async function fetchRepairs() {
     if (!repairs.value.length) error.value = err.message
   } finally {
     loading.value = false
+    fetching.value = false
   }
 }
 

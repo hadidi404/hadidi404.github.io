@@ -7,6 +7,7 @@ export default createRouter({
   routes: [
     { path: '/', component: HomePage },
     { path: '/repairs', component: () => import('../pages/GalleryPage.vue') },
-    { path: '/admin', component: () => import('../pages/AdminPage.vue') }
+    { path: '/admin', component: () => import('../pages/AdminPage.vue') },
+    { path: '/admin/manage', component: () => import('../pages/AdminManagePage.vue') }
   ]
 })
