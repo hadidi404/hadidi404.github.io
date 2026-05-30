@@ -1,5 +1,5 @@
 <script setup>
-import { ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const links = [
@@ -48,14 +48,9 @@ onBeforeUnmount(() => {
   if (scrollHandler) window.removeEventListener('scroll', scrollHandler)
 })
 
-async function scrollTo(id) {
+function scrollTo(id) {
   menuOpen.value = false
-  if (route.path !== '/') {
-    await router.push('/')
-    await nextTick()
-  }
-  const el = document.getElementById(id)
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  router.push({ path: '/', hash: '#' + id })
 }
 
 function navigateTo(path) {
