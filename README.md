@@ -1,20 +1,18 @@
 # Rayson Tech Services Website
 
-This repository contains the source code for the official website of **Rayson Tech Services**.
-
-The site is a showcase website built with **Vue 3, Vue Router, and Tailwind CSS v4**.  
-It presents services, recent repair work, and contact information —  
-no booking system or customer portal is included.
+Source code for the official website of **Rayson Tech Services** — a device repair portfolio and service showcase.
 
 ---
 
 ## Tech Stack
 
 - **Vue 3** — Composition API (`<script setup>`)
-- **Vue Router 4** — hash history for GitHub Pages compatibility
+- **Vue Router** — HTML5 history, clean URLs
 - **Tailwind CSS v4** — via `@tailwindcss/vite` plugin
-- **Vite** — build tool with vendor chunk splitting
-- **GitHub Pages** — hosted at `hadidi404.github.io`
+- **Vite** — build tool
+- **Vercel** — hosting with serverless API routes
+- **MongoDB Atlas** — repair data storage
+- **Cloudinary** — image storage and CDN delivery
 
 ---
 
@@ -22,20 +20,20 @@ no booking system or customer portal is included.
 
 | Route | Description |
 |---|---|
-| `/` | Home page — all main sections |
-| `/#/repairs` | Repairs gallery page |
+| `/` | Homepage — all main sections |
+| `/repairs` | Repair gallery |
+| `/admin` | Admin — create and edit repairs |
+| `/admin/manage` | Admin — reorder repairs via drag and drop |
 
-The home page is divided into the following sections:
+### Homepage sections
 
 - **Home** — hero with stats and CTAs
 - **Services** — phone, laptop, and diagnostics service cards
-- **Recent Repairs** — photo grid with a link to the full gallery
+- **Recent Repairs** — live data from MongoDB with before/after toggle
 - **Why Choose Me** — trust and value cards
 - **About** — bio, photo, and quick stats
 - **Service Area** — Baguio City and Infanta locations
 - **Contact** — phone, Messenger, and location info
-
-Navigation uses smooth scroll to section IDs with active highlight tracking.
 
 ---
 
@@ -45,20 +43,35 @@ Navigation uses smooth scroll to section IDs with active highlight tracking.
 src/
   components/
     layout/       # Navbar, Footer
-    sections/     # Page sections (HomeSection, ServicesSection, etc.)
-    ui/           # Reusable components (ServiceCard, SectionTitle, etc.)
+    sections/     # Homepage sections
+    ui/           # RecentRepairCards and other reusable components
   pages/
     HomePage.vue
     GalleryPage.vue
+    AdminPage.vue
+    AdminManagePage.vue
   router/
     index.js
   main.js         # App entry; registers global v-animate directive
   style.css
+api/
+  repairs.js      # Vercel serverless handler (GET, POST, PATCH, DELETE)
+  lib/
+    mongodb.js    # MongoDB connection
 public/
-  about.jpg
-  sunglass.png
-  favicon.svg
+  images/         # Static assets
 ```
+
+---
+
+## Environment Variables
+
+| Variable | Description |
+|---|---|
+| `MONGODB_URI` | MongoDB Atlas connection string |
+| `ADMIN_SECRET` | Password for admin access |
+| `VITE_CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name |
+| `VITE_CLOUDINARY_UPLOAD_PRESET` | Cloudinary unsigned upload preset |
 
 ---
 
