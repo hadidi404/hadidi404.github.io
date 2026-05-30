@@ -66,9 +66,9 @@ function navigateTo(path) {
   >
     <div class="max-w-7xl mx-auto h-16 flex items-center justify-between px-4 sm:px-8">
 
-      <div class="font-bold text-xl text-blue-600">
+      <button @click="scrollTo('home')" class="font-bold text-xl text-blue-600 focus:outline-none">
         Rayson Tech Services
-      </div>
+      </button>
 
       <div class="hidden md:flex gap-6">
         <button
