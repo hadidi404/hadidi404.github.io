@@ -32,6 +32,10 @@
       <button @click="logout" class="text-xs text-gray-400 hover:text-gray-700 transition-colors focus:outline-none">Log out</button>
     </div>
 
+    <datalist id="title-list"><option v-for="s in titleSuggestions" :key="s" :value="s" /></datalist>
+    <datalist id="device-list"><option v-for="s in deviceSuggestions" :key="s" :value="s" /></datalist>
+    <datalist id="label-list"><option v-for="s in labelSuggestions" :key="s" :value="s" /></datalist>
+
     <div class="max-w-6xl mx-auto px-4 py-6 grid lg:grid-cols-[1fr_340px] gap-8 items-start">
 
       <div class="space-y-6">
@@ -42,12 +46,12 @@
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
               <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Title</label>
-              <input v-model="form.title" type="text" placeholder="e.g. Screen Replacement"
+              <input v-model="form.title" type="text" list="title-list" placeholder="e.g. Screen Replacement"
                 class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
             </div>
             <div>
               <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Device</label>
-              <input v-model="form.device" type="text" placeholder="e.g. iPhone 14 Pro"
+              <input v-model="form.device" type="text" list="device-list" placeholder="e.g. iPhone 14 Pro"
                 class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
             </div>
           </div>
@@ -87,7 +91,7 @@
 
             <div>
               <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Label <span class="normal-case font-normal text-gray-400">(optional — e.g. Screen, Frame)</span></label>
-              <input v-model="pair.label" type="text" placeholder="Pair label"
+              <input v-model="pair.label" type="text" list="label-list" placeholder="Pair label"
                 class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
             </div>
 
@@ -265,24 +269,40 @@
               <p class="font-semibold text-gray-800 text-sm">Crop Image</p>
               <p class="text-xs text-gray-400 mt-0.5">Drag to adjust. 4:3 ratio is fixed.</p>
             </div>
-            <button @click="cancelCrop" class="p-2 rounded-xl hover:bg-gray-100 text-gray-500 transition-colors focus:outline-none">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+            <div class="flex items-center gap-2">
+              <button @click="cropperInstance?.rotate(-90)" class="p-2 rounded-xl hover:bg-gray-100 text-gray-500 transition-colors focus:outline-none" title="Rotate left">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                </svg>
+              </button>
+              <button @click="cropperInstance?.rotate(90)" class="p-2 rounded-xl hover:bg-gray-100 text-gray-500 transition-colors focus:outline-none" title="Rotate right">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3" />
+                </svg>
+              </button>
+              <button @click="cancelCrop" class="p-2 rounded-xl hover:bg-gray-100 text-gray-500 transition-colors focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
 
           <div class="overflow-hidden flex-1 min-h-0 bg-gray-50">
             <img ref="cropImgEl" :src="cropImgSrc" class="max-w-full block" style="max-height: 60vh;" />
           </div>
 
-          <div class="flex gap-3 justify-end px-5 py-4 border-t border-gray-100">
-            <button @click="cancelCrop" class="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors focus:outline-none">
-              Cancel
-            </button>
-            <button @click="applyCrop" class="px-5 py-2.5 rounded-xl text-sm font-semibold bg-blue-600 text-white hover:bg-blue-500 transition-colors focus:outline-none">
-              Use Crop
-            </button>
+          <div class="flex items-center justify-between px-5 py-4 border-t border-gray-100">
+            <p v-if="uploadError" class="text-xs text-red-500">{{ uploadError }}</p>
+            <div v-else></div>
+            <div class="flex gap-3">
+              <button @click="cancelCrop" :disabled="uploading" class="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors focus:outline-none disabled:opacity-40">
+                Cancel
+              </button>
+              <button @click="applyCrop" :disabled="uploading" class="min-w-28 px-5 py-2.5 rounded-xl text-sm font-semibold bg-blue-600 text-white hover:bg-blue-500 transition-colors focus:outline-none disabled:opacity-60 disabled:cursor-not-allowed text-center">
+                {{ uploading ? 'Uploading...' : 'Use Crop' }}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -319,6 +339,7 @@ async function checkPassword() {
       authed.value = true
       passwordError.value = false
       passwordInput.value = ''
+      fetchSuggestions()
     }
   } catch {
     passwordError.value = true
@@ -333,6 +354,18 @@ function logout() {
 }
 
 const categories = ['Phone', 'Laptop', 'Tablet', 'Desktop']
+
+const existingRepairs = ref([])
+const titleSuggestions = computed(() => [...new Set(existingRepairs.value.map(r => r.title).filter(Boolean))])
+const deviceSuggestions = computed(() => [...new Set(existingRepairs.value.map(r => r.device).filter(Boolean))])
+const labelSuggestions = computed(() => [...new Set(existingRepairs.value.flatMap(r => r.images?.map(i => i.label) ?? []).filter(Boolean))])
+
+async function fetchSuggestions() {
+  try {
+    const res = await fetch('/api/repairs')
+    if (res.ok) existingRepairs.value = await res.json()
+  } catch { /* */ }
+}
 
 const form = reactive({
   title: '',
@@ -389,20 +422,47 @@ function onFileSelect(pairIndex, field, event) {
       autoCropArea: 0.95,
       movable: true,
       zoomable: true,
-      rotatable: false,
+      rotatable: true,
       scalable: false,
     })
   }
   reader.readAsDataURL(file)
 }
 
-function applyCrop() {
+const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
+const uploading = ref(false)
+const uploadError = ref(null)
+
+async function uploadToCloudinary(dataUrl) {
+  const fd = new FormData()
+  fd.append('file', dataUrl)
+  fd.append('upload_preset', UPLOAD_PRESET)
+  fd.append('folder', 'repairs')
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+    method: 'POST',
+    body: fd,
+  })
+  if (!res.ok) throw new Error('Upload failed')
+  return (await res.json()).secure_url
+}
+
+async function applyCrop() {
   if (!cropperInstance) return
   const canvas = cropperInstance.getCroppedCanvas({ maxWidth: 2000, maxHeight: 1500 })
   const dataUrl = canvas.toDataURL('image/jpeg', 0.95)
-  const { pairIndex, field } = cropTarget.value
-  form.images[pairIndex][field] = dataUrl
-  closeCropModal()
+  uploading.value = true
+  uploadError.value = null
+  try {
+    const url = await uploadToCloudinary(dataUrl)
+    const { pairIndex, field } = cropTarget.value
+    form.images[pairIndex][field] = url
+    closeCropModal()
+  } catch {
+    uploadError.value = 'Upload failed. Please try again.'
+  } finally {
+    uploading.value = false
+  }
 }
 
 function cancelCrop() {
@@ -527,5 +587,10 @@ onMounted(() => {
     sessionStorage.removeItem('edit_repair')
     try { loadForEdit(JSON.parse(toEdit)) } catch { /* */ }
   }
+  if (authed.value) fetchSuggestions()
 })
 </script>
+
+<style scoped>
+input::-webkit-calendar-picker-indicator { opacity: 0; pointer-events: none; }
+</style>

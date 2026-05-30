@@ -59,7 +59,7 @@
       </div>
 
       <div v-if="loading" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div v-for="n in 6" :key="n" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+        <div v-for="n in skeletonCount" :key="n" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
           <div class="aspect-4/3 bg-gray-200 animate-pulse"></div>
           <div class="p-5 space-y-2">
             <div class="h-5 bg-gray-200 rounded animate-pulse w-3/4"></div>
@@ -75,11 +75,11 @@
         <button @click="fetchRepairs" class="mt-3 text-sm text-blue-600 hover:underline focus:outline-none">Try again</button>
       </div>
 
-      <div v-else-if="filteredRepairs.length || fetching" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div v-else-if="filteredRepairs.length || fetching" :key="activeCategory" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <div
           v-for="(item, index) in filteredRepairs"
-          :key="item.id"
-          v-animate="index * 80"
+          :key="item._id"
+          v-animate="Math.min(index * 20, 150)"
           @click="openModal(index)"
           class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 hover:border-blue-100 cursor-pointer group"
         >
@@ -90,16 +90,13 @@
               :alt="`${item.title} — before`"
               class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
               :class="showAfter[item._id] ? 'opacity-0' : 'opacity-100'"
-              loading="lazy"
-              decoding="async"
             />
             <img
               :src="item.images[0].after"
               :alt="`${item.title} — after`"
               class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
               :class="(!item.images[0].before || showAfter[item._id]) ? 'opacity-100' : 'opacity-0'"
-              loading="lazy"
-              decoding="async"
+              @load="imgLoaded[item._id] = true"
             />
 
             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-all duration-300 flex items-center justify-center">
@@ -156,8 +153,8 @@
           </div>
         </div>
 
-        <template v-if="fetching">
-          <div v-for="n in 3" :key="`skel-${n}`" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+        <template v-if="fetching && extraSkeletons > 0">
+          <div v-for="n in extraSkeletons" :key="`skel-${n}`" class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
             <div class="aspect-4/3 bg-gray-200 animate-pulse"></div>
             <div class="p-5 space-y-2">
               <div class="h-5 bg-gray-200 rounded animate-pulse w-3/4"></div>
@@ -368,6 +365,9 @@ const repairs = ref([])
 const showAfter = reactive({})
 
 const CACHE_KEY = 'repairs_cache'
+const COUNT_KEY = 'repairs_count'
+
+const skeletonCount = ref(parseInt(localStorage.getItem(COUNT_KEY) || '6'))
 
 function applyData(data) {
   repairs.value = data
@@ -375,6 +375,7 @@ function applyData(data) {
 }
 
 const fetching = ref(false)
+const extraSkeletons = computed(() => Math.max(0, skeletonCount.value - repairs.value.length))
 
 async function fetchRepairs() {
   if (!repairs.value.length) {
@@ -386,7 +387,10 @@ async function fetchRepairs() {
   try {
     const res = await fetch('/api/repairs')
     if (!res.ok) throw new Error('Failed to fetch repairs')
-    applyData(await res.json())
+    const data = await res.json()
+    applyData(data)
+    skeletonCount.value = data.length
+    localStorage.setItem(COUNT_KEY, String(data.length))
   } catch (err) {
     if (!repairs.value.length) error.value = err.message
   } finally {
